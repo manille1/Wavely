@@ -1,1 +1,1 @@
-# app-photo-album
+# Wavely
