@@ -1,0 +1,92 @@
+body {
+    margin: 0;
+}
+
+nav {
+    display: flex;
+    align-items: center;
+    background-image: url(../img/nav_background.svg);
+    height: 174px;
+}
+
+nav > img {
+    margin-left: 9%;
+    height: 68px;
+    width: 68px;
+}
+
+main {
+    height: 100%;
+    padding: 0 12%;
+}
+
+.column_maker {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+h1 {
+    margin: 4em 0; 
+    font-family: "Salsa", cursive;
+}
+
+a {
+    text-decoration: none;
+    font-family: "Salsa", cursive;
+}
+
+.logBtn{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 50px;
+    width: 280px;
+    border: transparent;
+    border-radius: 36px;
+    background-color: #F2BB16;
+    margin-bottom: 3em;
+}
+
+.logBtn > a {
+    color: #000;
+    font-size: 25px;
+    font-weight: 500;
+}
+
+.registerBtn{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 50px;
+    width: 210px;
+    border-radius: 36px;
+    border: 1.5px solid #F2BB16;
+    background-color: transparent;
+}
+
+.registerBtn > a {
+    color: #000;
+    font-size: 20px;
+    font-weight: 400;
+}
+
+input {
+    margin-top: 2.6em;
+    height: 50px;
+    width: 280px;
+    font-size: 18px;
+    border: 0.5px solid #444444;
+    border-radius: 6px;
+}
+
+#loginBtn {
+    margin-top: 3em;
+}
+
+#registerBtn {
+    margin-top: 5em;
+    width: 280px;
+}

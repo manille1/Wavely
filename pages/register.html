@@ -9,21 +9,23 @@
     <link href="https://fonts.googleapis.com/css2?family=Salsa&display=swap" rel="stylesheet">
     
     <title>Wavely.</title>
-    <link rel="stylesheet" href="./assets/css/login.css" />
+    <link rel="stylesheet" href="../assets/css/login.css" />
 </head>
 <body>
     <header>
         <nav>
-            <img src="./assets/img/logo_Wavely.png" alt="logo Wavely">
+            <img src="../assets/img/logo_Wavely.png" alt="logo Wavely">
         </nav>
     </header>
     <main class="column_maker">
-        <h1>Bienvenue sur Wavely !</h1>
+        <form class="column_maker">
+            <input type="email" name="email" placeholder="Votre email">
+            <input type="password" name="password" placeholder="Votre password">
+            <input type="text" placeholder="Votre pseudo">
 
-        <div class="column_maker">
-            <div class="logBtn"><a href="./pages/login.html">Connectez-vous</a></div>
-            <div class="registerBtn"><a href="./pages/register.html">S'inscrire</a></div>
-        </div>
+
+            <button id="registerBtn" class="registerBtn" type="button"><a href="./profile.html">S'inscrire</a></button>
+        </form>
     </main>
 </body>
 </html>

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!--Font-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Salsa&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&family=Salsa&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    <title>Wavely.</title>
+    <link rel="stylesheet" href="../assets/css/style.css" />
+</head>
+<body>
+    <header>
+        <nav>
+            <img src="../assets/img/logo_Wavely.png" alt="logo Wavely">
+            <div id="menuBtn">
+                <a href="./menu.html"><i class="fa-solid fa-bars"></i></a> 
+            </div>
+        </nav>
+    </header>
+    <main>
+        <h1>Créer un nouvel album</h1>
+      
+        <form id="create_album_form" action="#" method="post" enctype="multipart/form-data">
+          <input type="text" id="album_title" name="album_title" placeholder="Titre" required>
+      
+          <textarea id="album_description" name="album_description" rows="5" placeholder="Description"></textarea>
+      
+          <label for="album_photos">Vos photos</label>
+          <input type="file" id="album_photos" name="album_photos[]" multiple>
+      
+          <label for="visibility">Visibilité</label>
+          <select id="visibility" name="visibility">
+            <option value="public">Public</option>
+            <option value="private">Privé</option>
+            <option value="restrected">Groupe d'amis</option>
+          </select>
+      
+          <button id="create_album_submit_btn" type="button">Créer l’album</button>
+        </form>
+      </main>      
+</body>
+</html>
