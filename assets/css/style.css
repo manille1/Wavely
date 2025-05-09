@@ -31,7 +31,11 @@ nav {
     height: 173.5px;
 }
 
-nav > img {
+nav > a {
+    margin: 0 0 4% 4%;
+}
+
+#logo {
     margin: 0 0 9% 9%;
     height: 68px;
     width: 68px;
@@ -71,13 +75,37 @@ nav > img {
     box-shadow: 0 2px 3px rgba(0, 0, 0, 0.3);
 }
 
-#username {
-    height: 35px;
+.username {
+    height: 30px;
     background-color: #D9D9D9;
     border-radius: 24px;
+    margin: 0 8px;
 }
 
-#username h2 {
+#my_profile {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10%;
+}
+
+#my_profile > .username > *{
+    font-size: 17px;
+    padding: 0 10px;
+    text-decoration: none;
+}
+
+#my_profile img{
+    height: 57px;
+    width: 57px;
+    border-radius: 50%;
+    background-position: center;
+    object-fit: cover;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.username > * {
+    color: #000;
     font-family: "Quicksand", sans-serif;
     font-size: 21px;
     font-weight: 500;
@@ -212,5 +240,75 @@ option {
     color: #000;
     font-family: "Quicksand", sans-serif;
     font-size: larger;
+    font-weight: 500;
+}
+
+
+
+#friends_profile {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 100%;
+    margin: 2em 0;
+    height: auto;
+    overflow-x: auto;
+    scrollbar-width: none;
+}
+
+.friends_pp {
+    background-color: #444444;
+    width: 70px;
+    height: 70px;
+    border-radius: 100px;
+    margin: 0 10px;
+    flex-shrink: 0;
+}
+
+#posts {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    gap: 20px;
+    width: 100%;
+}
+
+.post {
+    width: 100%;
+    max-width: 400px;
+    height: fit-content;
+    flex-shrink: 0;
+    gap: 0;
+}
+
+.post img {
+    width: 100%;
+    max-width: 400px;
+    border-top-right-radius: 24px;
+    border-top-left-radius: 24px;
+    margin: 0;
+    padding: 0;
+}
+
+.post > div {
+    background-color: rgba(17, 140, 140, 0.5);
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+    margin-top: 0;
+    padding: 9px;
+    border-bottom-left-radius: 24px;
+    border-bottom-right-radius: 24px;
+}
+
+.post > div h3 {
+    font-size: 20px;
+    margin: 0;
+}
+
+.post > div > * {
+    width: 100%;
+    text-align: start;
+    color: #000;
+    font-family: "Quicksand", sans-serif;
+    font-size: 17px;
     font-weight: 500;
 }
