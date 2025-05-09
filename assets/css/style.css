@@ -316,12 +316,19 @@ option {
 
 
 
+header {
+    position: relative;
+    z-index: 1;
+}
+
 #preview_album_photo {
-    filter: brightness(75%);
+    filter: brightness(70%);
     width: 100vw;
-    height: 260px;
+    height: 360px;
     background-position: center;
     object-fit: cover;
+    position: relative;
+    margin-top: -100px;
     z-index: -1;
 }
 
@@ -330,15 +337,19 @@ option {
     text-align: start;
 }
 
+#album_description p {
+    margin-bottom: 3.6em;
+}
+
 #photos {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 15px;
 }
 
 #photo {
     width: 100%;
-    max-width: 200px;
+    max-width: 300px;
     height: auto;
     background-color: #d9d9d9;
     border-radius: 24px;
