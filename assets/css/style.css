@@ -28,7 +28,7 @@ nav {
     align-items: center;
     justify-content: space-between;
     background-image: url(../img/nav_background.svg);
-    height: 174px;
+    height: 173.5px;
 }
 
 nav > img {
@@ -128,7 +128,7 @@ nav > img {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-evenly;
-    padding: 9px;
+    padding: 9px 0;
     width: 100%;
 }
 
@@ -159,6 +159,13 @@ nav > img {
     font-weight: 500;
 }
 
+h1{
+    margin: 2.3em 0;
+    text-align: center;
+    width: 100%;
+    font-family: "Salsa", cursive;
+}
+
 #create_album_form {
     display: flex;
     flex-direction: column;
@@ -176,4 +183,34 @@ nav > img {
     min-height: 20px;
     padding: 5px 10px;
     border-color: transparent;
+}
+
+select {
+    height: 25px;
+    width: 100px;
+    border-color: transparent;
+    border-radius: 24px;
+    background-color: rgba(186, 217, 206, 0.54);
+    text-align: center;
+    color: #000;
+    font-family: "Quicksand", sans-serif;
+}
+
+option {
+    background-color: #fffffdda;
+}
+
+#create_album_form > button {
+    flex-basis: auto;
+    margin: 5em auto;
+    height: 40px;
+    width: 180px;
+    border-color: transparent;
+    border-radius: 24px;
+    background-color: #F2BB16;
+    text-align: center;
+    color: #000;
+    font-family: "Quicksand", sans-serif;
+    font-size: larger;
+    font-weight: 500;
 }
