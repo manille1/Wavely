@@ -1,0 +1,17 @@
+body {
+    margin: 0;
+}
+
+#backgroud_nav {
+    margin: 0;
+    width: 100%;
+    height: 175px;
+    background-repeat: round;
+}
+
+#logo {
+    border-radius: 50%;
+    height: 50px;
+    width: 50px;
+    margin: 18px;
+}
