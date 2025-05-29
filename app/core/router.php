@@ -10,7 +10,7 @@
             if(isset($this->routes[$uri])) {
                 [$controllerName, $methodName] = explode('@', $this->routes[$uri]);
 
-                require '..\app\Controller\\' . $controllerName . '.php';
+                require '../app/Controller/' . $controllerName . '.php';
 
                 $controller = new $controllerName();
                 $controller->$methodName();
