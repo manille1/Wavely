@@ -1,6 +1,11 @@
 <?php
     class Router {
         public $routes = [];
+        public $pdo;
+
+        public function __construct(PDO $pdo) {
+            $this->pdo = $pdo;
+        }
 
         public function addRoute($uri, $route) {
             $this->routes[$uri] = $route;
@@ -11,8 +16,7 @@
                 [$controllerName, $methodName] = explode('@', $this->routes[$uri]);
 
                 require '../app/Controller/' . $controllerName . '.php';
-
-                $controller = new $controllerName();
+                $controller = new $controllerName($this->pdo);
                 $controller->$methodName();
 
             } else {

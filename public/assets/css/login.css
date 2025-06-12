@@ -1,11 +1,12 @@
 body {
     margin: 0;
+    height: 100%;
 }
 
 nav {
     display: flex;
     align-items: center;
-    background-image: url(../img/nav_background.svg);
+    background-image: url(../img/classic_nav_background.svg);
     height: 173.5px;
 }
 
@@ -38,7 +39,11 @@ a {
     font-family: "Salsa", cursive;
 }
 
-.logBtn{
+#choice_auth_btn {
+    margin-bottom: 13em;
+}
+
+.log_btn{
     display: flex;
     justify-content: center;
     align-items: center;
@@ -50,13 +55,13 @@ a {
     margin-bottom: 3em;
 }
 
-.logBtn > a {
+.log_btn > a {
     color: #000;
     font-size: 25px;
     font-weight: 500;
 }
 
-.registerBtn{
+.register_btn{
     display: flex;
     justify-content: center;
     align-items: center;
@@ -67,26 +72,70 @@ a {
     background-color: transparent;
 }
 
-.registerBtn > a {
+.register_btn > a {
     color: #000;
     font-size: 20px;
     font-weight: 400;
 }
 
+.login_form {
+    width: 100%;
+    max-width: 600px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: start;
+    font-family: "Quicksand", sans-serif;
+    margin-bottom: 10em;
+}
+
+label {
+    font-weight: 500;
+    width: 100%;
+}
+
 input {
-    margin-top: 2.6em;
-    height: 50px;
-    width: 280px;
+    margin-top: 3px;
+    margin-bottom: 2em;
+    height: 40px;
+    width: 100%;
     font-size: 18px;
     border: 0.5px solid #444444;
     border-radius: 6px;
 }
 
-#loginBtn {
-    margin-top: 3em;
+input::placeholder {
+  color: #5e5e5e;
+  opacity: 1;
 }
 
-#registerBtn {
-    margin-top: 5em;
-    width: 280px;
+.valid_btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 50px;
+    width: 80%;
+    border: transparent;
+    border-radius: 36px;
+    background-color: #F2BB16;
+    margin: 3em 0;
+    padding: 0 15px;
+    font-size: 20px;
+    font-family: "Salsa", cursive;
+}
+
+.register_form {
+    width: 100%;
+    max-width: 600px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: start;
+    font-family: "Quicksand", sans-serif;
+}
+
+.login_form_div, .register_form_div {
+    width: 100%;
+    display: flex;
+    justify-content: center;
 }

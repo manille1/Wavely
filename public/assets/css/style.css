@@ -27,7 +27,7 @@ nav {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    background-image: url(../img/nav_background.svg);
+    background-image: url(../img/classic_nav_background.svg);
     height: 173.5px;
 }
 
