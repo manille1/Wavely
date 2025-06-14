@@ -34,7 +34,7 @@
             <?php foreach ($albums as $album) : ?>
                 <div class="album-card">
                     <img src="../assets/img/album.svg" alt="album">
-                    <a href="/album?id=<?= $album['id'] ?>"><p>Corée du Sud 2025</p></a>
+                    <a href="/album?id=<?= $album['id'] ?>"><p><?= $album['name'] ?></p></a>
                 </div>
             <?php endforeach; ?>
         <?php endif; ?>

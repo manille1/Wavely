@@ -42,11 +42,11 @@
 
                     if(!empty($add_photos)){
                         //envoyer au formulaire d'ajout de photo et gérer tout ça dans les fichier relier aux photos
-                        header('Location : /add-photos-to-album');
+                        header('Location: /add-photos-to-album');
                         exit();
                     }
 
-                    header('Location : /profile');
+                    header('Location: /profile');
                     exit();
                 }                
             }
