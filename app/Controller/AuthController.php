@@ -34,8 +34,10 @@
                     $errors[] = "Erreur d'identification, veuillez essayer à nouveau";
                 } else {
                     $_SESSION["auth"] = true;
+                    $_SESSION["id"] = $user['id'];
                     $_SESSION["username"] = $user['username'];
                     $_SESSION["description"] = $user['description'];
+                    $_SESSION["profile_picture"] = !empty($user['profile_picture']) ? $user['profile_picture'] : 'default-pp.jpg';
                     header("Location: /feed");
                     exit();
                 }
@@ -84,6 +86,10 @@
 
                     if (empty($errors)) {
                         $res = User::create($this->pdo, $email, $username, $password, $profile_picture, $description);
+
+                        $_SESSION["auth"] = true;
+                        $_SESSION["username"] = $username;
+                        $_SESSION["description"] = $description;
                         header("Location: /feed");
                         exit();
                     }

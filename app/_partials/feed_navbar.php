@@ -1,9 +1,9 @@
 <nav>
     <img id="logo" src="../assets/img/logo_Wavely.png" alt="logo Wavely">
-    <a href="./profile.html">
+    <a href="/profile">
         <div id="my_profile">
             <div class="username"><p><?php echo $_SESSION['username']; ?></p></div>
-            <img src="../assets/img/pp.jpg" alt="your profile's photo">
+            <img src="../assets/img/<?php echo $_SESSION['profile_picture']; ?>" alt="your profile's picture">
         </div>
     </a>
 </nav>

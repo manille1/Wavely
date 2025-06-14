@@ -20,6 +20,8 @@
     $router->addRoute('/feed', 'Feed@showFeed');
 
     $router->addRoute('/profile', 'Profile@show');
+    $router->addRoute('/create-album', 'AlbumController@showCreate');
+    $router->addRoute('/create-album-send', 'AlbumController@create');
 
     $router->dispatch($_SERVER['REQUEST_URI']);
 

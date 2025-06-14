@@ -1,0 +1,55 @@
+<?php
+    require_once __DIR__ . "/../Model/AlbumManager.php";
+
+    class AlbumController{
+        private PDO $pdo;
+
+        public function __construct(PDO $pdo) {
+            $this->pdo = $pdo;
+        }
+
+        public function showCreate() {
+            ob_start();
+            include __DIR__ . '/../_partials/profile_navbar.php';
+            $navbar = ob_get_clean();
+
+            ob_start();
+            include __DIR__ . '/../View/create_album.php';
+            $content = ob_get_clean();
+
+            include __DIR__ . '/../View/layout.php';
+        }
+
+        public function create() {
+            $errors = [];
+            $title = $_POST['album_title'] ?? null;
+            $description = $_POST['album_description'] ?? null;
+            $add_photos = $_POST['add_photos'] ?? null;
+            $visibility = $_POST['visibility'] ?? null;
+
+            if(!empty($title) || !empty($description) 
+            || !empty($visibility)){
+                
+                $title = cleanString($title);
+                $owner_id = $_SESSION['id'];
+                $description = cleanString($description);
+                $date_creation = date('Y-m-d H:i:s');
+                $visibility = cleanString($visibility);
+
+                if(empty($errors)){
+                    $albumManager = new AlbumManager($this->pdo);
+                    $newAlbums = $albumManager->create($title, $owner_id, $description, $date_creation, $visibility);
+
+                    if(!empty($add_photos)){
+                        //envoyer au formulaire d'ajout de photo et gérer tout ça dans les fichier relier aux photos
+                        header('Location : /add-photos-to-album');
+                        exit();
+                    }
+
+                    header('Location : /profile');
+                    exit();
+                }                
+            }
+        }
+    }
+?>
