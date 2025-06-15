@@ -37,6 +37,10 @@
                 $state->bindParam(':date_creation', $date_creation);
                 $state->bindParam(':visibility', $visibility);
                 $state->execute();
+
+                $lastId = $this->pdo->lastInsertId();
+                return $this->getAlbumById($lastId);
+
             } catch (Exception $e) {
                 return $errors[] = "Erreur à la création de l'album {$e->getMessage()}";
             }

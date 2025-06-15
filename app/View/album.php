@@ -4,7 +4,7 @@
     <section id="album_presentation">
         <h1><?= $album['name'] ?></h1>
         <p><?= $album['description'] ?></p>
-        <a href="/create-photo">Créer une photo</a>
+        <a href="/create-photo?album_id=<?= $album['id'] ?>">Créer une photo</a>
     </section>
 
     <section id="photos">

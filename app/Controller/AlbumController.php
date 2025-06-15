@@ -65,7 +65,7 @@
 
                     if(!empty($add_photos)){
                         //envoyer au formulaire d'ajout de photo et gérer tout ça dans les fichier relier aux photos
-                        header('Location: /add-photos-to-album');
+                        header('Location: /create-photo?album_id=' . $newAlbums['id']);
                         exit();
                     }
 
@@ -73,6 +73,10 @@
                     exit();
                 }                
             }
+
+            $_SESSION["errors"] = $errors;
+            header("Location: /profile");
+            exit();
         }
     }
 ?>

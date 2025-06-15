@@ -2,17 +2,20 @@
   <h1>Créer une nouvel photo</h1>
 
   <form id="create_photo_form" class="create_form" action="/create-photo-send" method="post" enctype="multipart/form-data">
+    <input type="hidden" name="album_id" value="<?= htmlspecialchars($album_id) ?>">
+
     <label for="photo_title">Titre</label>
     <input type="text" id="photo_title" name="photo_title" placeholder="Titre" required>
 
     <label for="input_photo">Votre photo</label>
-    <input type="file" id="input_photo" name="photo">
+    <input type="file" id="input_photo" name="photo" required
+    onchange="if(this.files[0].size > 5 * 1024 * 1024){ alert('Image trop grande'); this.value = ''; }">
 
     <label for="photo_description">Description</label>
-    <textarea id="photo_description" name="photo_description" rows="5" placeholder="Description" required></textarea>
+    <textarea id="photo_description" name="photo_description" rows="4" placeholder="Description" required></textarea>
 
     <label for="photo_location">Lieu</label>
-    <input type="text" id="photo_location" name="photo_location" placeholder="Lieu" required>
+    <input type="text" id="photo_location" name="photo_location" placeholder="Lieu">
 
     <label for="visibility">Visibilité</label>
     <select id="visibility" name="visibility">
