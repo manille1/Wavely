@@ -1,5 +1,6 @@
 <?php
     require_once __DIR__ . "/../Model/AlbumManager.php";
+    require_once __DIR__ . "/../Model/PhotoManager.php";
 
     class AlbumController{
         private PDO $pdo;
@@ -25,6 +26,9 @@
 
             $albumManager = new AlbumManager($this->pdo);
             $album = $albumManager->getAlbumById($album_id);
+
+            $photoManager = new PhotoManager($this->pdo);
+            $photos = $photoManager->getPhotosByAlbumId($album_id);
 
             if (isset($album_id) && $_SESSION['id'] == $album['owner_id'] || $album['visibily'] === "public") {
                 ob_start();
