@@ -6,6 +6,16 @@
             $this->pdo = $pdo;
         }
 
+        public function getAlbumById($albumId) {
+            try {
+                $stmt = $this->pdo->prepare("SELECT * FROM albums WHERE id = ?");
+                $stmt->execute([$albumId]);
+                return $stmt->fetch(PDO::FETCH_ASSOC);
+            } catch (Exception $e) {
+                return $errors[] = "Erreur lors de la recherche de l'album {$e->getMessage()}";
+            }
+        }
+
         public function getAllAlbumsByUser($userId) {
             try {
                 $stmt = $this->pdo->prepare("SELECT * FROM albums WHERE owner_id = ?");
@@ -14,7 +24,6 @@
             } catch (Exception $e) {
                 return $errors[] = "Erreur lors de la recherche d'album de l'utilisateur {$e->getMessage()}";
             }
-            
         }
 
         public function create($title, $owner_id, $description, $date_creation, $visibility) {

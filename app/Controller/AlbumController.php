@@ -20,6 +20,25 @@
             include __DIR__ . '/../View/layout.php';
         }
 
+        public function showAlbum() {
+            $album_id = $_GET['id'] ?? null;
+
+            $albumManager = new AlbumManager($this->pdo);
+            $album = $albumManager->getAlbumById($album_id);
+
+            if (isset($album_id) && $_SESSION['id'] == $album['owner_id'] || $album['visibily'] === "public") {
+                ob_start();
+                include __DIR__ . '/../_partials/feed_navbar.php';
+                $navbar = ob_get_clean();
+
+                ob_start();
+                include __DIR__ . '/../View/album.php';
+                $content = ob_get_clean();
+
+                include __DIR__ . '/../View/layout.php';
+            }
+        }
+
         public function create() {
             $errors = [];
             $title = $_POST['album_title'] ?? null;

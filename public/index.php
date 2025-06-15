@@ -22,6 +22,7 @@
     $router->addRoute('/profile', 'Profile@show');
     $router->addRoute('/create-album', 'AlbumController@showCreate');
     $router->addRoute('/create-album-send', 'AlbumController@create');
+    $router->addRoute('/album', 'AlbumController@showAlbum');
 
     $router->dispatch($_SERVER['REQUEST_URI']);
 

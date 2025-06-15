@@ -12,6 +12,8 @@
         }
 
         public function dispatch($uri) {
+            $uri = parse_url($uri, PHP_URL_PATH);
+            
             if(isset($this->routes[$uri])) {
                 [$controllerName, $methodName] = explode('@', $this->routes[$uri]);
 
