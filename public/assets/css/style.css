@@ -1,6 +1,10 @@
 * {
     box-sizing: border-box;
 }
+
+::-webkit-scrollbar{
+    display: none;
+}
   
 html, body {
     margin: 0;
@@ -8,6 +12,11 @@ html, body {
     width: 100%;
     min-height: 100vh;
     overflow-x: hidden;
+}
+
+header {
+    position: relative;
+    z-index: 1;
 }
 
 main {
@@ -30,10 +39,6 @@ nav {
     background-image: url(../img/classic_nav_background.svg);
     height: 173.5px;
 }
-
-/* nav > a {
-    margin-right: 10px;
-} */
 
 #logo {
     margin: 0 0 30px 40px;
@@ -221,16 +226,26 @@ h1{
     font-family: "Salsa", cursive;
 }
 
-#create_album_form {
+
+.create_form {
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
     align-items: flex-start;
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto 0;
     color: #000;
     font-family: "Quicksand", sans-serif;
 }
 
-#create_album_form > input, #create_album_form > textarea {
+.create_form > label {
+    color: #000;
+    font-family: "Quicksand", sans-serif;
+    font-size: 19px;
+}
+
+.create_form > input, .create_form > textarea {
     margin-bottom: 1.5em;
     background-color: #D9D9D9;
     border-radius: 24px;
@@ -238,26 +253,33 @@ h1{
     min-height: 20px;
     padding: 5px 10px;
     border-color: transparent;
+    font-family: "Quicksand", sans-serif;
+    font-size: 17px;
+}
+
+#input_photo {
+    max-width: 400px;
 }
 
 select {
-    height: 25px;
-    width: 100px;
+    height: 35px;
+    width: 140px;
     border-color: transparent;
     border-radius: 24px;
     background-color: rgba(186, 217, 206, 0.54);
     text-align: center;
     color: #000;
     font-family: "Quicksand", sans-serif;
+    font-size: 17px;
 }
 
 option {
     background-color: #fffffdda;
 }
 
-#create_album_form > button {
+.create_form > button {
     flex-basis: auto;
-    margin: 5em auto;
+    margin: 3em auto;
     height: 40px;
     width: 180px;
     border-color: transparent;
@@ -269,6 +291,7 @@ option {
     font-size: larger;
     font-weight: 500;
 }
+
 
 #friends_profile {
     display: flex;
@@ -339,11 +362,6 @@ option {
     font-weight: 500;
 }
 
-header {
-    position: relative;
-    z-index: 1;
-}
-
 #preview_album_photo {
     filter: brightness(70%);
     width: 100vw;
@@ -352,15 +370,16 @@ header {
     object-fit: cover;
     position: relative;
     margin-top: -100px;
+    left: -15px;
     z-index: -1;
 }
 
-#album_description h1 {
+#album_presentation h1 {
     margin: 0;
     text-align: start;
 }
 
-#album_description p {
+#album_presentation p {
     margin-bottom: 3.6em;
 }
 

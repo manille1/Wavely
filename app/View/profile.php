@@ -15,19 +15,6 @@
     </section>
 
     <section id="album_section">
-        <div>
-            <img src="../assets/img/album.svg" alt="alnum">
-            <a href="./album.html"><p>Mykonos</p></a> 
-        </div>
-        <div>
-            <img src="../assets/img/album.svg" alt="alnum">
-            <a href="./album.html"><p>Deauville en 2024</p></a>
-        </div>
-        <div>
-            <img src="../assets/img/album.svg" alt="alnum">
-            <a href="./album.html"><p>Corée du Sud 2025</p></a>
-        </div>
-
         <?php if (empty($albums)) : ?>
             <p>Vous n’avez pas encore d’albums.</p>
         <?php else : ?>
