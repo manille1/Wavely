@@ -38,7 +38,7 @@
                 $description = cleanString($description);
                 $location = cleanString($location);
 
-                $maxSize = 2 * 1024 * 1024; //2Mo
+                $maxSize = 2 * 1024 * 1024; // 2Mo
                 if ($_FILES['photo']['size'] > $maxSize) {
                     $errors[] = 'L’image dépasse la taille maximale autorisée (2 Mo).';
                     exit();
