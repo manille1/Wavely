@@ -6,7 +6,46 @@
             $this->pdo = $pdo;
         }
 
-        public function getPhotosByAlbumId($albumId) {
+        public function checkAndConvertImage(){
+            $maxSize = 2 * 1024 * 1024; // 2Mo
+            if ($_FILES['photo']['size'] > $maxSize) {
+                $errors[] = 'L’image dépasse la taille maximale autorisée (2 Mo).';
+                exit();
+            }
+
+            if (isset($_FILES['photo']) && $_FILES['photo']['error'] === UPLOAD_ERR_OK) {
+                $fileTmp = $_FILES['photo']['tmp_name'];
+                $fileOriginalName = $_FILES['photo']['name'];
+                $fileExtension = strtolower(pathinfo($fileOriginalName, PATHINFO_EXTENSION));
+
+                $newFileName = bin2hex(random_bytes(8)) . date('Y-m-d_H-i-s') . '.webp';
+                $destination = __DIR__ . '/../../public/uploads/' . $newFileName;
+
+                if ($fileExtension === 'jpg' || $fileExtension === 'jpeg') {
+                    $photo = imagecreatefromjpeg($fileTmp);
+                    imagewebp($photo, $destination, 100);
+                    imagedestroy($photo);
+
+                } else if ($fileExtension === 'png') {
+                    $photo = imagecreatefrompng($fileTmp);
+                    imagewebp($photo, $destination, 100);
+                    imagedestroy($photo);
+
+                } else if ($fileExtension === 'webp') {
+                    move_uploaded_file($fileTmp, $destination);
+
+                } else {
+                    $errors[] = 'Format non pris en charge. Veuillez utiliser jpg, jpeg, png ou webp.';
+                }
+
+                return $photo_url = 'uploads/' . $newFileName;
+
+            } else {
+                $errors[] = 'Erreur lors de l\'upload de la photo.';
+            }
+        }
+
+        public function getPhotosByAlbumId(int $albumId) {
             try {
                 $stmt = $this->pdo->prepare("SELECT * FROM photos
                 INNER JOIN photo_album ON photos.id = photo_album.photo_id 
@@ -21,7 +60,7 @@
             }
         }
 
-        public function getPhotoById($photoId) {
+        public function getPhotoById(int $photoId) {
             try {
                 $stmt = $this->pdo->prepare("SELECT * FROM photos WHERE id = :photo_id");
                 $stmt->bindParam(':photo_id', $photoId);
@@ -33,7 +72,7 @@
             }
         }
 
-        public function linkedPhotoToAlbum($photo_id, $album_id) {
+        public function linkedPhotoToAlbum(int $photo_id, int $album_id) {
             try {
                 $stmt = $this->pdo->prepare('INSERT INTO photo_album (photo_id, album_id) VALUES (:photo_id, :album_id)');
                 $stmt->bindParam(':photo_id', $photo_id);
@@ -45,7 +84,7 @@
             }
         }
 
-        public function attributePhotoRole($photo_id, $user_id, $role) {
+        public function attributePhotoRole(int $photo_id, int $user_id, $role) {
             try {
                 $stmt = $this->pdo->prepare('INSERT INTO photo_roles (photo_id, user_id, role) VALUES (:photo_id, :user_id, :role)');
                 $stmt->bindParam(':photo_id', $photo_id);
@@ -58,7 +97,7 @@
             }
         }
 
-        public function create($name, $image_url, $date_upload, $creator_id, $visibility, $description, $location) {
+        public function create(string $name, string $image_url, string $date_upload, int $creator_id, string $visibility, string $description, string $location) {
             try {
                 $state = $this->pdo->prepare('INSERT INTO photos (`name`, `image_url`, `date_upload`, `creator_id`, `visibility`, `description`, `location`) 
                     VALUES (:name, :image_url, :date_upload, :creator_id, :visibility, :description, :location)');

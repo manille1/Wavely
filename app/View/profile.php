@@ -1,6 +1,6 @@
 <main>
     <section id="user_profile">
-        <img src="../assets/img/<?php echo $_SESSION['profile_picture']; ?>" alt="your profile's picture">
+        <img src="../<?php echo $_SESSION['profile_picture']; ?>" alt="your profile's picture">
         <div class="username"><h2><?php echo $_SESSION['username']; ?></h2></div>
         <div id="user_description">
             <p><?php echo $_SESSION['description']; ?></p>

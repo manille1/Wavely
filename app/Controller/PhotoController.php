@@ -38,47 +38,10 @@
                 $description = cleanString($description);
                 $location = cleanString($location);
 
-                $maxSize = 2 * 1024 * 1024; // 2Mo
-                if ($_FILES['photo']['size'] > $maxSize) {
-                    $errors[] = 'L’image dépasse la taille maximale autorisée (2 Mo).';
-                    exit();
-                }
-
-                if (isset($_FILES['photo']) && $_FILES['photo']['error'] === UPLOAD_ERR_OK) {
-                    $fileTmp = $_FILES['photo']['tmp_name'];
-                    $fileOriginalName = $_FILES['photo']['name'];
-                    $fileExtension = strtolower(pathinfo($fileOriginalName, PATHINFO_EXTENSION));
-
-                    $newFileName = bin2hex(random_bytes(8)) . date('Y-m-d_H-i-s') . '.webp';
-                    $destination = __DIR__ . '/../../public/uploads/' . $newFileName;
-
-                    if ($fileExtension === 'jpg' || $fileExtension === 'jpeg') {
-                        $photo = imagecreatefromjpeg($fileTmp);
-                        imagewebp($photo, $destination, 100);
-                        imagedestroy($photo);
-
-                    } else if ($fileExtension === 'png') {
-                        $photo = imagecreatefrompng($fileTmp);
-                        imagewebp($photo, $destination, 100);
-                        imagedestroy($photo);
-
-                    } else if ($fileExtension === 'webp') {
-                        move_uploaded_file($fileTmp, $destination);
-
-                    } else {
-                        $errors[] = 'Format non pris en charge. Veuillez utiliser jpg, jpeg, png ou webp.';
-                    }
-
-                    $photo_url = 'uploads/' . $newFileName;
-
-                } else {
-                    var_dump($_FILES['photo']);
-                    var_dump($_FILES['photo']['error']);
-                    $errors[] = 'Erreur lors de l\'upload de la photo.';
-                }
+                $photoManager = new PhotoManager($this->pdo);
+                $photo_url = $photoManager->checkAndConvertImage();
 
                 if (empty($errors)) {
-                    $photoManager = new PhotoManager($this->pdo);
                     $newPhoto = $photoManager->create($title, $photo_url, $date_upload, $creator_id, $visibility, $description, $location);
 
                     if ($newPhoto === false) {

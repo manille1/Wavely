@@ -1,5 +1,6 @@
 <?php
     require_once __DIR__ . "/../Model/User.php";
+    require_once __DIR__ . "/../Model/PhotoManager.php";
 
     class AuthController {
         private PDO $pdo;
@@ -49,24 +50,28 @@
         }
 
         public function register() {
-
             $errors = [];
             $email = $_POST['email'] ?? null;
             $password = $_POST['password'] ?? null;
             $confirmation = $_POST['confirmation'] ?? null;
             $username = $_POST['username'] ?? null;
-            $profile_picture = $_POST['profile_picture'] ?? 'default-pp';
+            $photo_url = null;
             $description = $_POST['description'] ?? null;
 
             if (!empty($username) && !empty($email) &&
-                !empty($password) && !empty($confirmation) && !empty($description)){
+                !empty($password) && !empty($confirmation) && 
+                isset($_FILES['photo']) && !empty($description)){
 
                     $username = cleanString($username);
                     $email = cleanString($email);
                     $password = cleanString($password);
                     $confirmation = cleanString($confirmation);
-                    $profile_picture = cleanString($profile_picture);
                     $description = cleanString($description);
+
+                    $photoManager = new PhotoManager($this->pdo);
+                    $profile_picture_url = $photoManager->checkAndConvertImage();
+
+                    var_dump('ça passe');
 
                     if ($confirmation !== $password) {
                         $errors[] = 'Le mot de passe et sa confirmation sont différents';
@@ -85,7 +90,7 @@
                     }
 
                     if (empty($errors)) {
-                        $res = User::create($this->pdo, $email, $username, $password, $profile_picture, $description);
+                        $res = User::create($this->pdo, $email, $username, $password, $profile_picture_url, $description);
 
                         $_SESSION["auth"] = true;
                         $_SESSION["username"] = $username;
@@ -98,7 +103,8 @@
             }
 
             $_SESSION["errors"] = $errors;
-            header("Location: /");
+            var_dump($errors);
+            //header("Location: /");
             exit();
             
         }

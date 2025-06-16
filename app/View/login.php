@@ -19,7 +19,7 @@
     </div>
 
     <div class="register_form_div">
-        <form method="POST"  class="register_form" action="/register/submit">
+        <form method="POST"  class="register_form" action="/register/submit" enctype="multipart/form-data">
             <label for="regi_email">Email</label>
             <input type="email" id="regi_email" name="email" placeholder="Ton email" required>
             
@@ -33,7 +33,7 @@
             <input type="text" id="regi_username" name="username" placeholder="Le nom que les utilisateur verront ..." required>
 
             <label for="profile_picture">Photo de profile</label>
-            <input type="text" id="profile_picture" name="profile_picture" placeholder="Ta photo de profile">
+            <input type="file" id="profile_picture" name="photo" accept="image/*" required>
 
             <label for="description">Description</label>
             <input type="textarea" id="description" name="description" placeholder="Ce qui te décris ..." required>
