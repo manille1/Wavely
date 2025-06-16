@@ -8,8 +8,7 @@
     <input type="text" id="photo_title" name="photo_title" placeholder="Titre" required>
 
     <label for="input_photo">Votre photo</label>
-    <input type="file" id="input_photo" name="photo" required
-    onchange="if(this.files[0].size > 5 * 1024 * 1024){ alert('Image trop grande'); this.value = ''; }">
+    <input type="file" id="input_photo" name="photo" accept="image/*" required>
 
     <label for="photo_description">Description</label>
     <textarea id="photo_description" name="photo_description" rows="4" placeholder="Description" required></textarea>
@@ -29,15 +28,27 @@
 </main>
 
 <script>
-    const openBtn = document.getElementById('menuBtn');
-    const closeBtn = document.getElementById('closeMenuBtn');
-    const sideMenu = document.getElementById('side-menu');
+    const openBtn = document.getElementById('menuBtn')
+    const closeBtn = document.getElementById('closeMenuBtn')
+    const sideMenu = document.getElementById('side-menu')
+
+    const form = document.querySelector('form')
+    const imageInput = document.querySelector('input[type="file"][name="photo"]')
+    const maxSize = 2 * 1024 * 1024 //2 Mo
 
     openBtn.addEventListener('click', () => {
-        sideMenu.classList.add('open');
-    });
+        sideMenu.classList.add('open')
+    })
 
     closeBtn.addEventListener('click', () => {
-        sideMenu.classList.remove('open');
-    });
+        sideMenu.classList.remove('open')
+    })
+
+    form.addEventListener('submit', (e) => {
+        const image = imageInput.files[0]
+        if (image && image.size > maxSize){
+            e.preventDefault()
+            alert('Votre photo est trop lourde ! Le serveur n\'a pas d\'assez gros bras !')
+        }
+    })
 </script>

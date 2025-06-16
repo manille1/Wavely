@@ -29,15 +29,15 @@
 </main>
 
 <script>
-    const openBtn = document.getElementById('menuBtn');
-    const closeBtn = document.getElementById('closeMenuBtn');
-    const sideMenu = document.getElementById('side-menu');
+    const openBtn = document.getElementById('menuBtn')
+    const closeBtn = document.getElementById('closeMenuBtn')
+    const sideMenu = document.getElementById('side-menu')
 
     openBtn.addEventListener('click', () => {
-        sideMenu.classList.add('open');
-    });
+        sideMenu.classList.add('open')
+    })
 
     closeBtn.addEventListener('click', () => {
-        sideMenu.classList.remove('open');
-    });
+        sideMenu.classList.remove('open')
+    })
 </script>

@@ -38,6 +38,12 @@
                 $description = cleanString($description);
                 $location = cleanString($location);
 
+                $maxSize = 2 * 1024 * 1024; //2Mo
+                if ($_FILES['photo']['size'] > $maxSize) {
+                    $errors[] = 'L’image dépasse la taille maximale autorisée (2 Mo).';
+                    exit();
+                }
+
                 if (isset($_FILES['photo']) && $_FILES['photo']['error'] === UPLOAD_ERR_OK) {
                     $fileTmp = $_FILES['photo']['tmp_name'];
                     $fileOriginalName = $_FILES['photo']['name'];
@@ -66,6 +72,8 @@
                     $photo_url = 'uploads/' . $newFileName;
 
                 } else {
+                    var_dump($_FILES['photo']);
+                    var_dump($_FILES['photo']['error']);
                     $errors[] = 'Erreur lors de l\'upload de la photo.';
                 }
 
