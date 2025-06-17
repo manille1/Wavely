@@ -6,7 +6,7 @@
             $this->pdo = $pdo;
         }
 
-        public function getAlbumById($albumId) {
+        public function getAlbumById(int $albumId) {
             try {
                 $stmt = $this->pdo->prepare("SELECT * FROM albums WHERE id = ?");
                 $stmt->execute([$albumId]);
@@ -16,7 +16,7 @@
             }
         }
 
-        public function getAllAlbumsByUser($userId) {
+        public function getAllAlbumsByUser(int $userId) {
             try {
                 $stmt = $this->pdo->prepare("SELECT * FROM albums WHERE owner_id = ?");
                 $stmt->execute([$userId]);
@@ -26,16 +26,17 @@
             }
         }
 
-        public function create($title, $owner_id, $description, $date_creation, $visibility) {
+        public function create(string $title, int $owner_id, string $description, string $date_creation, string $visibility, string $album_cover_url) {
             try {
-                $state = $this->pdo->prepare('INSERT INTO albums (`name`, `owner_id`, `description`, `date_creation`, `visibility`) 
-                VALUES (:name, :owner_id, :description, :date_creation, :visibility)');
+                $state = $this->pdo->prepare('INSERT INTO albums (`name`, `owner_id`, `description`, `date_creation`, `visibility`, `album_cover_url`) 
+                VALUES (:name, :owner_id, :description, :date_creation, :visibility, :album_cover_url)');
 
                 $state->bindParam(':name', $title);
                 $state->bindParam(':owner_id', $owner_id);
                 $state->bindParam(':description', $description);
                 $state->bindParam(':date_creation', $date_creation);
                 $state->bindParam(':visibility', $visibility);
+                $state->bindParam(':album_cover_url', $album_cover_url);
                 $state->execute();
 
                 $lastId = $this->pdo->lastInsertId();

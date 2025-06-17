@@ -1,5 +1,5 @@
 <nav>
-    <img id="logo" src="../assets/img/logo_Wavely.png" alt="logo Wavely">
+    <a href="/feed"><img id="logo" src="../assets/img/logo_Wavely.png" alt="logo Wavely"></a>
     <a href="/profile">
         <div id="my_profile">
             <div class="username"><p><?php echo $_SESSION['username']; ?></p></div>

@@ -48,12 +48,13 @@
                         $errors[] = 'Erreur lors de la création de la photo.';
                     } else {
                         $albumId = intval($_POST['album_id'] ?? 0);
+                        $albumId = cleanString($albumId);
 
                         $linked = $photoManager->linkedPhotoToAlbum($newPhoto['id'], $albumId);
                         $roleSet = $photoManager->attributePhotoRole($newPhoto['id'], $_SESSION['id'], 'owner');
 
                         if ($linked && $roleSet) {
-                            header('Location: /profile');
+                            header('Location: /album?id=' . $albumId);
                             exit();
                         } else {
                             $errors[] = 'Erreur lors de la liaison photo à l\'album ou de l\'attribution du rôle.';

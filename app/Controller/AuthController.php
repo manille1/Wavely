@@ -38,7 +38,7 @@
                     $_SESSION["id"] = $user['id'];
                     $_SESSION["username"] = $user['username'];
                     $_SESSION["description"] = $user['description'];
-                    $_SESSION["profile_picture"] = !empty($user['profile_picture']) ? $user['profile_picture'] : 'default-pp.jpg';
+                    $_SESSION["profile_picture"] = !empty($user['profile_picture']) ? $user['profile_picture'] : '/assets/img/default-pp.jpg';
                     header("Location: /feed");
                     exit();
                 }

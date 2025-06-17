@@ -49,9 +49,10 @@
             $description = $_POST['album_description'] ?? null;
             $add_photos = $_POST['add_photos'] ?? null;
             $visibility = $_POST['visibility'] ?? null;
+            $album_cover_url = null;
 
-            if(!empty($title) || !empty($description) 
-            || !empty($visibility)){
+            if(!empty($title) && isset($_FILES['photo']) && !empty($description) 
+            && !empty($visibility)){
                 
                 $title = cleanString($title);
                 $owner_id = $_SESSION['id'];
@@ -59,9 +60,12 @@
                 $date_creation = date('Y-m-d H:i:s');
                 $visibility = cleanString($visibility);
 
+                $photoManager = new PhotoManager($this->pdo);
+                $album_cover_url = $photoManager->checkAndConvertImage();
+
                 if(empty($errors)){
                     $albumManager = new AlbumManager($this->pdo);
-                    $newAlbums = $albumManager->create($title, $owner_id, $description, $date_creation, $visibility);
+                    $newAlbums = $albumManager->create($title, $owner_id, $description, $date_creation, $visibility, $album_cover_url);
 
                     if(!empty($add_photos)){
                         //envoyer au formulaire d'ajout de photo et gérer tout ça dans les fichier relier aux photos
