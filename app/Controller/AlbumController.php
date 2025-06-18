@@ -52,9 +52,19 @@
             $album = $albumManager->getAlbumById($album_id);
 
             if (isset($album_id) && $_SESSION['id'] == $album['owner_id'] && empty($errors)) {
+                $photoManager = new PhotoManager($this->pdo);
+                $photos = $photoManager->getPhotosByAlbumId($album_id);
+                
+                foreach ($photos as $photo ) {
+                    $photoManager->delete($photo['id']);
+                    $path = __DIR__ . '/../../public/' . $photo['image_url'];
+                    if (file_exists($path)) {
+                        unlink($path); 
+                    }
+                }
+
                 $albumManager->delete($album_id);
 
-                var_dump('tout est censé être supprimer');
                 header('Location: /profile');
                 exit();              
             }

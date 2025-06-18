@@ -27,6 +27,8 @@
 
     $router->addRoute('/create-photo', 'PhotoController@showCreate');
     $router->addRoute('/create-photo-send', 'PhotoController@create');
+    $router->addRoute('/photo', 'PhotoController@showPhoto');
+    $router->addRoute('/delete-photo', 'PhotoController@delete');
 
     $router->dispatch($_SERVER['REQUEST_URI']);
 

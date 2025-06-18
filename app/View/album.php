@@ -17,6 +17,7 @@
                     <img src="../<?= $photo['image_url']?>" alt="photo de <?= $photo['creator_id']?> créer le <?= $photo['date_upload']?>">
                     <p><?= $photo['name'] ?></p>
                     <p><i class="fa-solid fa-map-pin"></i><?= $photo['location']?></p>
+                    <a href="/delete-photo?photo_id=<?= $photo['id'] ?>"><i class="fa-solid fa-trash-can"></i></a>
                 </div>
             <?php endforeach; ?>
         <?php endif; ?>

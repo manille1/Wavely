@@ -41,6 +41,21 @@
             }
         }
 
+        public function getAlbumIdByPhotoId(int $photoId) {
+            try {
+                $stmt = $this->pdo->prepare("SELECT id FROM albums
+                INNER JOIN photo_album AS pa ON albums.id = pa.album_id
+                WHERE pa.photo_id = :photo_id;");
+
+                $stmt->bindParam(':photo_id', $photoId);
+                $stmt->execute();
+                return (int) $stmt->fetchColumn();
+
+            } catch (Exception $e) {
+                return $errors[] = "Erreur lors de la recherche d'album liée à un photo {$e->getMessage()}";
+            }
+        }
+
         public function getPhotoById(int $photoId) {
             try {
                 $stmt = $this->pdo->prepare("SELECT * FROM photos WHERE id = :photo_id");
@@ -98,6 +113,17 @@
             } catch (Exception $e) {
                 error_log("Erreur à la création de la photo : " . $e->getMessage());
                 return false;
+            }
+        }
+
+        public function delete(int $photo_id) {
+            try {
+                $state = $this->pdo->prepare('DELETE FROM photos WHERE id = :id;');
+
+                $state->bindParam(':id', $photo_id);
+                $state->execute();
+            } catch (Exception $e) {
+                return $errors[] = "Erreur à la suppression de l'photo {$e->getMessage()}";
             }
         }
 

@@ -22,6 +22,27 @@
             include __DIR__ . '/../View/layout.php';
         }
 
+        public function delete() {
+            $errors = [];
+            $photo_id = $_GET['photo_id'] ?? null;
+
+            $photoManager = new PhotoManager($this->pdo);
+            $photo = $photoManager->getPhotoById($photo_id);
+
+            if (isset($photo_id) && $_SESSION['id'] == $photo['creator_id'] && empty($errors)) {
+                $albumId = $photoManager->getAlbumIdByPhotoId($photo_id);
+                $path = __DIR__ . '/../../public/' . $photo['image_url'];
+                if (file_exists($path)) {
+                    unlink($path); 
+                }
+
+                $photoManager->delete($photo_id);
+
+                header('Location: /album?id=' . $albumId);
+                exit();              
+            }
+        }
+
         public function create() {
             $errors = [];
             $title = $_POST['photo_title'] ?? null;
@@ -50,7 +71,6 @@
                         $errors[] = 'Erreur lors de la création de la photo.';
                     } else {
                         $albumId = intval($_POST['album_id'] ?? 0);
-                        $albumId = cleanString($albumId);
 
                         $linked = $photoManager->linkedPhotoToAlbum($newPhoto['id'], $albumId);
                         $roleSet = $photoManager->attributePhotoRole($newPhoto['id'], $_SESSION['id'], 'owner');
