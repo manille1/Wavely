@@ -39,6 +39,7 @@
                     $_SESSION["username"] = $user['username'];
                     $_SESSION["description"] = $user['description'];
                     $_SESSION["profile_picture"] = !empty($user['profile_picture']) ? $user['profile_picture'] : '/assets/img/default-pp.jpg';
+
                     header("Location: /feed");
                     exit();
                 }
@@ -96,7 +97,10 @@
                         $_SESSION["auth"] = true;
                         $_SESSION["username"] = $username;
                         $_SESSION["description"] = $description;
-                        header("Location: /feed");
+                        
+                        $success[] = 'Votre compte à été crée. Connectez-vous !';
+                        $_SESSION['success'] = $success;
+                        header("Location: /");
                         exit();
                     }
             } else {
@@ -104,8 +108,7 @@
             }
 
             $_SESSION["errors"] = $errors;
-            var_dump($errors);
-            //header("Location: /");
+            header("Location: /");
             exit();
             
         }
@@ -113,6 +116,7 @@
         public function logout() {
             session_destroy();
             header("Location: /");
+            exit();
         }
     }
 ?>

@@ -22,6 +22,26 @@
         <?= $navbar; ?>
     </header>
 
+    <!--error-->
+    <?php if(!empty($_SESSION['errors'])): ?>
+        <div class="error_message_div">
+            <?php foreach ($_SESSION['errors'] as $error): ?>
+                <p class="error_message"><?= htmlspecialchars($error) ?></p>
+            <?php endforeach; ?>
+        </div>
+        <?php unset($_SESSION['errors']); ?>
+    <?php endif; ?>
+
+    <!--success-->
+    <?php if(!empty($_SESSION['success'])): ?>
+        <div class="success_message_div">
+            <?php foreach ($_SESSION['success'] as $success): ?>
+                <p class="success_message"><?= htmlspecialchars($success) ?></p>
+            <?php endforeach; ?>
+        </div>
+        <?php unset($_SESSION['success']); ?>
+    <?php endif; ?>
+
     <?= $content; ?>
     
 </body>

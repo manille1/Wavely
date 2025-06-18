@@ -38,6 +38,8 @@
 
                 $photoManager->delete($photo_id);
 
+                $success[] = 'Photo supprimer avec succès';
+                $_SESSION['success'] = $success;
                 header('Location: /album?id=' . $albumId);
                 exit();              
             }

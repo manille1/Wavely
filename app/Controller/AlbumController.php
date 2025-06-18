@@ -65,6 +65,8 @@
 
                 $albumManager->delete($album_id);
 
+                $success[] = 'Album supprimer avec succès';
+                $_SESSION['success'] = $success;
                 header('Location: /profile');
                 exit();              
             }
