@@ -17,7 +17,7 @@
     $router->addRoute('/register/submit', 'AuthController@register');
     $router->addroute('/logout', 'AuthController@logout');
     
-    $router->addRoute('/feed', 'Feed@showFeed');
+    $router->addRoute('/feed', 'FeedController@showFeed');
 
     $router->addRoute('/profile', 'Profile@show');
     $router->addRoute('/create-album', 'AlbumController@showCreate');

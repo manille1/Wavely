@@ -225,6 +225,15 @@ nav {
     font-weight: 500;
 }
 
+.album_icon {
+    height: 179px;
+    width: 179px;
+    object-position: center;
+    object-fit: cover;
+    background-size: cover;
+    border-radius: 36px; 
+}
+
 h1{
     margin: 2.3em 0;
     text-align: center;

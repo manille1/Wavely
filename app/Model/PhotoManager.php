@@ -6,42 +6,23 @@
             $this->pdo = $pdo;
         }
 
-        public function checkAndConvertImage(){
-            $maxSize = 2 * 1024 * 1024; // 2Mo
-            if ($_FILES['photo']['size'] > $maxSize) {
-                $errors[] = 'L’image dépasse la taille maximale autorisée (2 Mo).';
-                exit();
-            }
+        public function getVisiblePhotoForUser($user_id) {
+            try {
+                $stmt = $this->pdo->prepare("SELECT photos.*, users.username, 
+                DATE(photos.date_upload) AS date_only FROM photos
+                LEFT JOIN users ON photos.creator_id = users.id
+                LEFT JOIN photo_roles ON photos.id = photo_roles.photo_id
+                WHERE (photo_roles.user_id = :user_id AND photo_roles.role = 'viewer')
+                OR photos.visibility = 'public'
+                ORDER BY photos.date_upload DESC
+                LIMIT 50;");
 
-            if (isset($_FILES['photo']) && $_FILES['photo']['error'] === UPLOAD_ERR_OK) {
-                $fileTmp = $_FILES['photo']['tmp_name'];
-                $fileOriginalName = $_FILES['photo']['name'];
-                $fileExtension = strtolower(pathinfo($fileOriginalName, PATHINFO_EXTENSION));
+                $stmt->bindParam(':user_id', $user_id);
+                $stmt->execute();
+                return $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-                $newFileName = bin2hex(random_bytes(8)) . date('Y-m-d_H-i-s') . '.webp';
-                $destination = __DIR__ . '/../../public/uploads/' . $newFileName;
-
-                if ($fileExtension === 'jpg' || $fileExtension === 'jpeg') {
-                    $photo = imagecreatefromjpeg($fileTmp);
-                    imagewebp($photo, $destination, 100);
-                    imagedestroy($photo);
-
-                } else if ($fileExtension === 'png') {
-                    $photo = imagecreatefrompng($fileTmp);
-                    imagewebp($photo, $destination, 100);
-                    imagedestroy($photo);
-
-                } else if ($fileExtension === 'webp') {
-                    move_uploaded_file($fileTmp, $destination);
-
-                } else {
-                    $errors[] = 'Format non pris en charge. Veuillez utiliser jpg, jpeg, png ou webp.';
-                }
-
-                return $photo_url = 'uploads/' . $newFileName;
-
-            } else {
-                $errors[] = 'Erreur lors de l\'upload de la photo.';
+            } catch (Exception $e) {
+                return $errors[] = "Erreur lors de la recherche de photo pour le feed d'actualité {$e->getMessage()}";
             }
         }
 
@@ -119,5 +100,45 @@
                 return false;
             }
         }
+
+        public function checkAndConvertImage(){
+            $maxSize = 2 * 1024 * 1024; // 2Mo
+            if ($_FILES['photo']['size'] > $maxSize) {
+                $errors[] = 'L’image dépasse la taille maximale autorisée (2 Mo).';
+                exit();
+            }
+
+            if (isset($_FILES['photo']) && $_FILES['photo']['error'] === UPLOAD_ERR_OK) {
+                $fileTmp = $_FILES['photo']['tmp_name'];
+                $fileOriginalName = $_FILES['photo']['name'];
+                $fileExtension = strtolower(pathinfo($fileOriginalName, PATHINFO_EXTENSION));
+
+                $newFileName = bin2hex(random_bytes(8)) . date('Y-m-d_H-i-s') . '.webp';
+                $destination = __DIR__ . '/../../public/uploads/' . $newFileName;
+
+                if ($fileExtension === 'jpg' || $fileExtension === 'jpeg') {
+                    $photo = imagecreatefromjpeg($fileTmp);
+                    imagewebp($photo, $destination, 100);
+                    imagedestroy($photo);
+
+                } else if ($fileExtension === 'png') {
+                    $photo = imagecreatefrompng($fileTmp);
+                    imagewebp($photo, $destination, 100);
+                    imagedestroy($photo);
+
+                } else if ($fileExtension === 'webp') {
+                    move_uploaded_file($fileTmp, $destination);
+
+                } else {
+                    $errors[] = 'Format non pris en charge. Veuillez utiliser jpg, jpeg, png ou webp.';
+                }
+
+                return $photo_url = 'uploads/' . $newFileName;
+
+            } else {
+                $errors[] = 'Erreur lors de l\'upload de la photo.';
+            }
+        }
+
     }
 ?>

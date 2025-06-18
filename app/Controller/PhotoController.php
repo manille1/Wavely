@@ -33,7 +33,7 @@
             if (!empty($title) && isset($_FILES['photo']) && !empty($description) && !empty($visibility)) {
                 
                 $title = cleanString($title);
-                $date_upload = date('Y-m-d H:i:s');
+                $date_upload = date('Y/m/d H:i:s');
                 $creator_id = $_SESSION['id'];
                 $description = cleanString($description);
                 $location = cleanString($location);

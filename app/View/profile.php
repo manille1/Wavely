@@ -16,12 +16,14 @@
 
     <section id="album_section">
         <?php if (empty($albums)) : ?>
-            <p>Vous n’avez pas encore d’albums.</p>
+            <p class="void_case">Vous n’avez pas encore d’albums.</p>
         <?php else : ?>
             <?php foreach ($albums as $album) : ?>
                 <div class="album-card">
-                    <img src="../assets/img/album.svg" alt="album">
-                    <a href="/album?id=<?= $album['id'] ?>"><p><?= $album['name'] ?></p></a>
+                    <a href="/album?id=<?= $album['id'] ?>">
+                        <img class="album_icon" src="../<?= $album['album_cover_url'] ? $album['album_cover_url'] : 'assets/img/album.svg'; ?>" alt="album">
+                        <p><?= $album['name'] ?></p>
+                    </a>
                 </div>
             <?php endforeach; ?>
         <?php endif; ?>
