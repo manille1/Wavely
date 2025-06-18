@@ -1,15 +1,18 @@
 <main>
     <section id="friends_profile">
-        <div class="friends_pp"></div>
-        <div class="friends_pp"></div>
-        <div class="friends_pp"></div>
-        <div class="friends_pp"></div>
-        <div class="friends_pp"></div>
-        <div class="friends_pp"></div>
-        <div class="friends_pp"></div>
-        <div class="friends_pp"></div>
-        <div class="friends_pp"></div>
-        <div class="friends_pp"></div>
+        <?php if (empty($otherUsers)) : ?>
+            <p>Aucun autre utilisateur trouver.</p>
+        <?php else : ?>
+            <?php foreach ($otherUsers as $user) : ?>
+                <div class="friends_pp">
+                    <a href="/user-profile?id=<?= $user['id'] ?>&username=<?= $user['username'] ?>">
+                        <img src="../<?= $user['profile_picture'] ? $user['profile_picture'] : 'assets/img/default-pp.jpg' ?>" 
+                            alt="<?= $user['username'] ?>">
+                        <p><?= $user['username'] ?></p>
+                    </a>
+                </div>
+            <?php endforeach; ?>
+        <?php endif; ?>
     </section>
 
     <section id="posts">

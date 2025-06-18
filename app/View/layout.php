@@ -22,7 +22,6 @@
         <?= $navbar; ?>
     </header>
 
-    <!--error-->
     <?php if(!empty($_SESSION['errors'])): ?>
         <div class="error_message_div">
             <?php foreach ($_SESSION['errors'] as $error): ?>
@@ -32,7 +31,6 @@
         <?php unset($_SESSION['errors']); ?>
     <?php endif; ?>
 
-    <!--success-->
     <?php if(!empty($_SESSION['success'])): ?>
         <div class="success_message_div">
             <?php foreach ($_SESSION['success'] as $success): ?>

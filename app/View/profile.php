@@ -1,9 +1,9 @@
 <main>
     <section id="user_profile">
-        <img src="../<?php echo $_SESSION['profile_picture']; ?>" alt="your profile's picture">
-        <div class="username"><h2><?php echo $_SESSION['username']; ?></h2></div>
+        <img src="../<?= $profile_picture; ?>" alt="your profile's picture">
+        <div class="username"><h2><?= $username; ?></h2></div>
         <div id="user_description">
-            <p><?php echo $_SESSION['description']; ?></p>
+            <p><?= $description; ?></p>
         </div>
         <div class="flex-end">
             <select id="filterBtn" name="filterBtn">
@@ -16,15 +16,17 @@
 
     <section id="album_section">
         <?php if (empty($albums)) : ?>
-            <p class="void_case">Vous n’avez pas encore d’albums.</p>
+            <p class="void_case">Aucun album</p>
         <?php else : ?>
             <?php foreach ($albums as $album) : ?>
-                <div class="album-card">
-                    <a href="/album?id=<?= $album['id'] ?>">
-                        <img class="album_icon" src="../<?= $album['album_cover_url'] ? $album['album_cover_url'] : 'assets/img/album.svg'; ?>" alt="album">
-                        <p><?= $album['name'] ?></p>
-                    </a>
-                </div>
+                <?php if ($album['owner_id'] === $_SESSION['id'] || $album['visibility'] === 'public') : ?>
+                    <div class="album-card">
+                        <a href="/album?id=<?= $album['id'] ?>">
+                            <img class="album_icon" src="../<?= $album['album_cover_url'] ? $album['album_cover_url'] : 'assets/img/album.svg'; ?>" alt="album">
+                            <p><?= $album['name'] ?></p>
+                        </a>
+                    </div>
+                <?php endif; ?>
             <?php endforeach; ?>
         <?php endif; ?>
     </section>

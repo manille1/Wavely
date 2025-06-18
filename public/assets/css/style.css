@@ -362,13 +362,24 @@ option {
     scrollbar-width: none;
 }
 
-.friends_pp {
-    background-color: #444444;
+.friends_pp img{
+    object-position: center;
+    object-fit: cover;
+    background-size: cover;
     width: 70px;
     height: 70px;
     border-radius: 100px;
-    margin: 0 10px;
+    margin: 0 15px;
     flex-shrink: 0;
+}
+
+.friends_pp p{
+    text-align: center;
+    color: #000;
+    font-family: "Quicksand", sans-serif;
+    font-size: 17px;
+    font-weight: 500;
+    margin: 0;
 }
 
 #posts {

@@ -1,5 +1,5 @@
 <main>
-    <img id="preview_album_photo" src="../<?= $album['album_cover_url'] ? $album['album_cover_url'] : 'assets/img/default-pp.jpg'; ?>" alt="cover album">
+    <img id="preview_album_photo" src="../<?= $album['album_cover_url'] ? $album['album_cover_url'] : 'assets/img/default-image.jpg'; ?>" alt="cover album">
 
     <section id="album_presentation">
         <h1><?= $album['name'] ?></h1>

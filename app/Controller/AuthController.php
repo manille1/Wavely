@@ -29,7 +29,8 @@
             if(null === $email || null === $password) {
                 $errors[] = "identifiant ou mot de passe vide";
             } else {
-                $user = User::findByEmail($this->pdo, $email);
+                $User = new User($this->pdo);
+                $user = $User->findByEmail($email);
         
                 if (!$user || !password_verify($password, $user['password'])) {
                     $errors[] = "Erreur d'identification, veuillez essayer à nouveau";
@@ -86,13 +87,15 @@
                         $errors[] = 'email invalide';
                     }
 
-                    if (User::findByUsername($this->pdo, $username) !== null) {
+                    $User = new User($this->pdo);
+
+                    if ($User->findByUsername($username) !== null) {
                         $errors[] = 'Le username est déjà utilisé';
                         exit();
                     }
 
                     if (empty($errors)) {
-                        $res = User::create($this->pdo, $email, $username, $password, $profile_picture_url, $description);
+                        $res = $User->create($email, $username, $password, $profile_picture_url, $description);
 
                         $_SESSION["auth"] = true;
                         $_SESSION["username"] = $username;

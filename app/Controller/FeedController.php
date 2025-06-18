@@ -1,5 +1,6 @@
 <?php
     require_once __DIR__ . "/../Model/PhotoManager.php";
+    require_once __DIR__ . "/../Model/User.php";
 
     class FeedController {
         private PDO $pdo;
@@ -10,6 +11,9 @@
 
         public function showFeed() {
             $user_id = $_SESSION['id'];
+
+            $user = new User($this->pdo);
+            $otherUsers = $user->getOtherUsers($user_id);
 
             $photoManager = new PhotoManager($this->pdo);
             $photos_feed = $photoManager->getVisiblePhotoForUser($user_id);

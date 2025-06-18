@@ -18,6 +18,7 @@
     $router->addroute('/logout', 'AuthController@logout');
     
     $router->addRoute('/feed', 'FeedController@showFeed');
+    $router->addRoute('/user-profile', 'Profile@showOtherProfile');
 
     $router->addRoute('/profile', 'Profile@show');
     $router->addRoute('/create-album', 'AlbumController@showCreate');
