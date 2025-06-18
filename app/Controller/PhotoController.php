@@ -30,7 +30,9 @@
             $location = $_POST['photo_location'] ?? null;
             $visibility = $_POST['visibility'] ?? null;
 
-            if (!empty($title) && isset($_FILES['photo']) && !empty($description) && !empty($visibility)) {
+            if (!empty($title) && isset($_FILES['photo']) && 
+            !empty($description) && !empty($visibility) &&
+            $_FILES['photo']['error'] === UPLOAD_ERR_OK) {
                 
                 $title = cleanString($title);
                 $date_upload = date('Y/m/d H:i:s');

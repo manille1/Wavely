@@ -60,7 +60,8 @@
 
             if (!empty($username) && !empty($email) &&
                 !empty($password) && !empty($confirmation) && 
-                isset($_FILES['photo']) && !empty($description)){
+                isset($_FILES['photo']) && !empty($description) &&
+                $_FILES['photo']['error'] === UPLOAD_ERR_OK){
 
                     $username = cleanString($username);
                     $email = cleanString($email);

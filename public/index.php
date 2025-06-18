@@ -23,6 +23,7 @@
     $router->addRoute('/create-album', 'AlbumController@showCreate');
     $router->addRoute('/create-album-send', 'AlbumController@create');
     $router->addRoute('/album', 'AlbumController@showAlbum');
+    $router->addRoute('/delete-album', 'AlbumController@delete');
 
     $router->addRoute('/create-photo', 'PhotoController@showCreate');
     $router->addRoute('/create-photo-send', 'PhotoController@create');

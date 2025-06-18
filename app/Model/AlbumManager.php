@@ -46,5 +46,16 @@
                 return $errors[] = "Erreur à la création de l'album {$e->getMessage()}";
             }
         }
+
+        public function delete(int $album_id) {
+            try {
+                $state = $this->pdo->prepare('DELETE FROM albums WHERE id = :id;');
+
+                $state->bindParam(':id', $album_id);
+                $state->execute();
+            } catch (Exception $e) {
+                return $errors[] = "Erreur à la suppression de l'album {$e->getMessage()}";
+            }
+        }
     }
 ?>

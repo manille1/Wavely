@@ -5,6 +5,7 @@
         <h1><?= $album['name'] ?></h1>
         <p><?= $album['description'] ?></p>
         <a href="/create-photo?album_id=<?= $album['id'] ?>">Créer une photo</a>
+        <a href="/delete-album?album_id=<?= $album['id'] ?>">Supprimer l'album</a>
     </section>
 
     <section id="photos">

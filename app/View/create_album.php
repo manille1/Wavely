@@ -7,7 +7,7 @@
     <textarea id="album_description" name="album_description" rows="5" placeholder="Description" required></textarea>
 
     <label for="input_photo">L'image de présentation de votre album</label>
-    <input type="file" id="input_photo" name="photo" accept="image/*" required>
+    <input type="file" id="input_photo" name="photo" accept="image/*">
 
     <label for="albums_photos">Ajoutez maintenant une photos à votre album :</label>
     <input type="checkbox" id="albums_photos" name="add_photos" value="photos">
