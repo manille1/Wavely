@@ -39,5 +39,4 @@
     $router->addRoute('/delete-photo', 'PhotoController@delete');
 
     $router->dispatch($_SERVER['REQUEST_URI']);
-
 ?>
