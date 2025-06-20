@@ -9,12 +9,13 @@
         }
 
         public function showCreate() {
-            $album_id = intval($_GET['album_id'] ?? 0);
-            $photo_id = intval($_GET['id'] ?? 0);
             
             ob_start();
             include __DIR__ . '/../_partials/profile_navbar.php';
             $navbar = ob_get_clean();
+
+            $album_id = intval($_GET['album-id'] ?? 0);
+            $photo_id = intval($_GET['id'] ?? 0);
 
             ob_start();
             include __DIR__ . '/../View/form_photo.php';
@@ -25,7 +26,7 @@
 
         public function showUpdate() {
             $errors = [];
-            $album_id = intval($_GET['album_id'] ?? 0);
+            $album_id = intval($_GET['album-id'] ?? 0);
             $photo_id = intval($_GET['id'] ?? 0);
 
             $photoManager = new PhotoManager($this->pdo);
@@ -75,9 +76,10 @@
 
                 $title = cleanString($title);
                 $new_photo_url = null;
-                $owner_id = $photo['creator_id'];
+                $creator_id = $photo['creator_id'];
                 $description = cleanString($description);
                 $visibility = cleanString($visibility);
+                $location = cleanString($location);
 
                 if (isset($_FILES['photo']) && $_FILES['photo']['error'] === UPLOAD_ERR_OK) {
 
@@ -86,18 +88,22 @@
                     if (file_exists($path)) {
                         unlink($path); 
                     }
-                    $old_photo = $photoManager->delete($old_photo['id']);
 
                     $new_photo_url = $photoManager->checkAndConvertImage();
                 }
 
                 if (empty($errors)) {
-                    $photoManager->update($photo_id, $title, $owner_id, $description, $visibility, $new_photo_url);
+                    $photoManager->update($photo_id, $title, $creator_id, $description, $visibility, $new_photo_url, $location);
 
-                    $success[] = 'photo Modifier avec succès';
-                    $_SESSION['success'] = $success;
-                    //header('Location: /album?id=' . $album_id);
-                    exit();     
+                    if (empty($errors)) {
+                        $success[] = 'La photo a été modifier avec succès';
+                        $_SESSION['success'] = $success;
+                        header('Location: /album?id=' . $album_id);
+                        exit();   
+                        
+                    } else {
+                        $errors[] = 'Un problème et survenus lors de la modification de photo.';
+                    }
                 } 
             } else {
                 $errors[] = 'Merci de renseigner tout les champs';
@@ -160,8 +166,6 @@
                     } else {
                         $albumId = intval($_POST['album_id'] ?? 0);
 
-                        var_dump($albumId);
-                        var_dump($newPhoto['id']);
                         $linked = $photoManager->linkedPhotoToAlbum($newPhoto['id'], $albumId);
                         $roleSet = $photoManager->attributePhotoRole($newPhoto['id'], $_SESSION['id'], 'owner');
 

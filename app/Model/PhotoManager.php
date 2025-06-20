@@ -56,21 +56,6 @@
             }
         }
 
-        // public function getPhotoByAlbumId(int $albumId) {
-        //     try {
-        //         $stmt = $this->pdo->prepare("SELECT * FROM photos
-        //         INNER JOIN photo_album AS pa ON photos.id = pa.photo_id
-        //         WHERE pa.album_id = :album_id;");
-
-        //         $stmt->bindParam(':album_id', $albumId);
-        //         $stmt->execute();
-        //         return $stmt->fetch(PDO::FETCH_ASSOC);
-
-        //     } catch (Exception $e) {
-        //         return $errors[] = "Erreur lors de la recherche d'album liée à un photo {$e->getMessage()}";
-        //     }
-        // }
-
         public function getPhotoById(int $photoId) {
             try {
                 $stmt = $this->pdo->prepare("SELECT * FROM photos WHERE id = :photo_id");
@@ -131,14 +116,14 @@
             }
         }
 
-        public function update(int $photo_id, string $title, int $creator_id, string $description, string $visibility, string $image_url) {
+        public function update(int $photo_id, string $title, int $creator_id, string $description, string $visibility, string $image_url, string $location) {
             try {
                 $state = $this->pdo->prepare('UPDATE photos
                 SET `name` = :name, 
+                `image_url` = :image_url,
                 `visibility` = :visibility,
                 `description` = :description,
-                `location` = :location,
-                `image_url` = :image_url
+                `location` = :location
                 WHERE creator_id = :creator_id
                 AND id = :photo_id;');
 

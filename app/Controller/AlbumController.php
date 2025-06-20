@@ -31,7 +31,7 @@
             $photoManager = new PhotoManager($this->pdo);
             $photos = $photoManager->getPhotosByAlbumId($album_id);
 
-            if (isset($album_id) && $album['visibility'] == 'public') {
+            if (isset($album_id) && $album['visibility'] == 'public' || $_SESSION['id'] === $album['owner_id']) {
                 ob_start();
                 include __DIR__ . '/../_partials/feed_navbar.php';
                 $navbar = ob_get_clean();
@@ -43,7 +43,7 @@
                 include __DIR__ . '/../View/layout.php';
 
             } else {
-                $errors[] = 'Une erreur c\'est produite lors de la récupération des donnée, veuillez réessayer.';
+                $errors[] = 'Une erreur c\'est produite lors de la récupération des données, veuillez réessayer.';
                 $_SESSION["errors"] = $errors;
                 header("Location: /profile");
                 exit();
@@ -92,7 +92,8 @@
             $visibility = $_POST['visibility'] ?? null;
             $album_cover_url = '';
 
-            if (isset($album_id) && $_SESSION['id'] == $album['owner_id'] && empty($errors)) {
+            if (isset($album_id) && !empty($title) && !empty($description) && 
+            !empty($visibility) && $_SESSION['id'] == $album['owner_id'] && empty($errors)) {
                 $title = cleanString($title);
                 $owner_id = $album['owner_id'];
                 $new_album_cover_url = '';
@@ -116,7 +117,7 @@
                 if (empty($errors)) {
                     $albumManager->update($album_id, $title, $owner_id, $description, $visibility, $new_album_cover_url);
 
-                    $success[] = 'Album Modifier avec succès';
+                    $success[] = 'L\'album a été modifier avec succès';
                     $_SESSION['success'] = $success;
                     header('Location: /album?id=' . $album_id);
                     exit();     
