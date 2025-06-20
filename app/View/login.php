@@ -32,7 +32,7 @@
             <label for="regi_username">Pseudo</label>
             <input type="text" id="regi_username" name="username" placeholder="Le nom que les utilisateur verront ..." required>
 
-            <label for="profile_picture">Photo de profile</label>
+            <label for="profile_picture">Photo de profile (max 2Mo)</label>
             <input type="file" id="profile_picture" name="photo" accept="image/*" required>
 
             <label for="description">Description</label>

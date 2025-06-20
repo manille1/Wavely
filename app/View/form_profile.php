@@ -6,7 +6,7 @@
         <input type="text" id="username" name="username" 
         placeholder="Le nom que les utilisateur verront ..." value="<?= $_SESSION['username'] ?>" required>
 
-        <label for="profile_picture">Photo de profile</label>
+        <label for="profile_picture">Photo de profile (max 2Mo)</label>
         <input type="file" id="profile_picture" name="photo" accept="image/*" required>
 
         <label for="description">Description</label>

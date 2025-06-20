@@ -23,24 +23,38 @@
     </header>
 
     <?php if(!empty($_SESSION['errors'])): ?>
-        <div class="error_message_div">
             <?php foreach ($_SESSION['errors'] as $error): ?>
-                <p class="error_message"><?= htmlspecialchars($error) ?></p>
+                <div class="toast error">
+                    <p><?= htmlspecialchars($error) ?></p>
+                </div>
             <?php endforeach; ?>
-        </div>
         <?php unset($_SESSION['errors']); ?>
     <?php endif; ?>
 
     <?php if(!empty($_SESSION['success'])): ?>
-        <div class="success_message_div">
             <?php foreach ($_SESSION['success'] as $success): ?>
-                <p class="success_message"><?= htmlspecialchars($success) ?></p>
+                <div class="toast success">
+                    <p><?= htmlspecialchars($success) ?></p>
+                </div>
             <?php endforeach; ?>
-        </div>
         <?php unset($_SESSION['success']); ?>
     <?php endif; ?>
 
     <?= $content; ?>
+
+    <script src="/assets/js/main.js"></script>
+    <script>
+        const toasts = document.querySelectorAll('.toast')
+        toasts.forEach(toast => {
+            toast.classList.add('display')
+            console.log('je panique');
+
+            setTimeout(() => {
+                toast.classList.remove('display')
+                console.log('je panique 2');
+            }, 5000);
+        });
+    </script>
     
 </body>
 </html>

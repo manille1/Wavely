@@ -46,48 +46,45 @@ nav {
     width: 68px;
 }
 
-.error_message_div {
-    min-width: 200px;
-    max-width: 600px;
-    min-height: 35px;
-    position: relative;
-    background: rgba(230, 57, 57, 0.7);
-    border: 2px solid #ca0202;
+
+.toast {
+    padding: 5px;
+    width: 70%;
+    position: fixed;
+    top: 4em;
+    right: 0;
     border-radius: 24px;
     text-align: center;
-    left: calc(50vw - 50%);
-    margin: 0 auto 20px;
-    z-index: 2;
+    opacity: 0;
+    z-index: 4;
+    transform: translateY(-10px);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
 
-.error_message {
+.display {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.toast p {
     color: #000;
     font-family: "Quicksand", sans-serif;
-    font-size: 21px;
-    font-weight: 500;
+    font-size: 17px;
+    font-weight: 400;
     margin: 10px;
 }
 
-.success_message_div {
-    min-width: 200px;
-    max-width: 600px;
-    min-height: 35px;
-    position: relative;
+.error {
+    background: rgba(230, 57, 57, 0.7);
+    border: 2px solid #ca0202;
+}
+
+.success {
     background: rgba(76, 201, 81, 0.7);
     border: 2px solid #188a07;
-    border-radius: 18px;
-    text-align: center;
-    margin: 0 auto 20px;
-    z-index: 2;
 }
 
-.success_message {
-    color: #000;
-    font-family: "Quicksand", sans-serif;
-    font-size: 21px;
-    font-weight: 500;
-    margin: 10px;
-}
 
 #menuBtn {
     display: flex;
@@ -125,10 +122,11 @@ nav {
 }
 
 .username {
-    max-height: 30px;
+    max-height: 57px;
     background-color: #D9D9D9;
     border-radius: 24px;
     margin: 0 8px;
+    transition: left 0.5s ease;
 }
 
 .username > * {
@@ -160,6 +158,7 @@ nav {
     background-position: center;
     object-fit: cover;
     box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+    flex-shrink: 0;
 }
 
 #user_description {
@@ -285,6 +284,10 @@ nav {
     font-weight: 500;
 }
 
+.album-card {
+    max-width: 180px;
+}
+
 .album_icon {
     height: 179px;
     width: 179px;
@@ -374,6 +377,13 @@ option {
 }
 
 
+#feed_title {
+    margin-top: 30px;
+    margin-bottom: 1.5em;
+    font-size: 50px;
+    text-align: start;
+}
+
 #friends_profile {
     display: flex;
     flex-direction: row;
@@ -393,7 +403,6 @@ option {
     height: 70px;
     border-radius: 100px;
     margin: 0 15px;
-    flex-shrink: 0;
 }
 
 .friends_pp p{
@@ -439,8 +448,15 @@ option {
 }
 
 .post > div h3 {
-    font-size: 20px;
+    font-size: 21px;
+    font-weight: 600;
     margin: 0;
+}
+
+p {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .post > div > * {
@@ -450,6 +466,7 @@ option {
     font-family: "Quicksand", sans-serif;
     font-size: 17px;
     font-weight: 500;
+    margin: 3px 0;
 }
 
 #preview_album_photo {
@@ -509,7 +526,7 @@ option {
 
 @media (min-width: 558px) and (max-width: 767px) {
     #photos {
-        grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+        columns: 190px;
     }
 }
 
@@ -519,7 +536,7 @@ option {
     }
 
     #photos {
-        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        columns: 250px;
     }
 }
 
@@ -529,6 +546,6 @@ option {
     }
 
     #photos {
-        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        columns: 300x;
     }
 }

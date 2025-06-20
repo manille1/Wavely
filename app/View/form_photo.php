@@ -10,7 +10,7 @@
     <?= $_GET['action'] === 'create' ? '' : 'value="' . $photo['name'] . '"'; ?> 
     required>
 
-    <label for="input_photo">Votre photo</label>
+    <label for="input_photo">Votre photo (max 2Mo)</label>
     <input type="file" id="input_photo" name="photo" accept="image/*" required>
 
     <label for="photo_description">Description</label>

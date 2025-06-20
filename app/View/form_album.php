@@ -14,7 +14,7 @@
     <textarea id="album_description" name="album_description" rows="5" placeholder="Description" 
     required><?= $_GET['action'] === 'create' ? '' : htmlspecialchars($album['description']); ?></textarea>
 
-    <label for="input_photo">L'image de présentation de votre album</label>
+    <label for="input_photo">L'image de présentation de votre album (max 2Mo)</label>
     <input type="file" id="input_photo" name="photo" accept="image/*">
 
     <?php if($_GET['action'] === 'create') : ?>
