@@ -1,0 +1,567 @@
+* {
+    box-sizing: border-box;
+}
+
+::-webkit-scrollbar{
+    display: none;
+}
+  
+html, body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+header {
+    position: relative;
+    z-index: 1;
+}
+
+main {
+    width: 100%;
+    margin: 0 auto;
+    padding: 0 15px;
+}
+
+.visible {
+    opacity: 1;
+}
+
+.non-visible{
+    opacity: 0;
+}
+
+.void_case {
+    color: #000;
+    font-family: "Quicksand", sans-serif;
+    font-size: 21px;
+    font-weight: 500;
+    margin: 10px;
+}
+  
+#menu_nav {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    background-image: url(../img/yellow_nav_background.svg);
+}  
+
+nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-image: url(../img/classic_nav_background.svg);
+    height: 173.5px;
+}
+
+#logo {
+    margin: 0 0 30px 40px;
+    height: 68px;
+    width: 68px;
+}
+
+
+.toast {
+    padding: 5px;
+    width: 70%;
+    position: fixed;
+    top: 4em;
+    right: 0;
+    border-radius: 24px;
+    text-align: center;
+    opacity: 0;
+    z-index: 4;
+    transform: translateY(-10px);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.display {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.toast p {
+    color: #000;
+    font-family: "Quicksand", sans-serif;
+    font-size: 17px;
+    font-weight: 400;
+    margin: 10px;
+}
+
+.error {
+    background: rgba(230, 57, 57, 0.7);
+    border: 2px solid #ca0202;
+}
+
+.success {
+    background: rgba(76, 201, 81, 0.7);
+    border: 2px solid #188a07;
+}
+
+
+#menuBtn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #FFFFFD;
+    border-radius: 50%;
+    height: 43px;
+    width: 43px;
+    margin: 0 25px 35px 0;
+    flex : 0 0 auto;
+}
+
+#menuBtn a {
+    text-decoration: none;
+    color: #000;
+    font-size: 23px;
+}
+
+#user_profile {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+#user_profile img {
+    margin: 12px;
+    width: 220px;
+    height: 220px;
+    border-radius: 50%;
+    background-position: center;
+    object-fit: cover;
+    box-shadow: 0 2px 3px rgba(0, 0, 0, 0.3);
+}
+
+.username {
+    max-height: 57px;
+    background-color: #D9D9D9;
+    border-radius: 24px;
+    margin: 0 8px;
+    transition: left 0.5s ease;
+}
+
+.username > * {
+    color: #000;
+    font-family: "Quicksand", sans-serif;
+    font-size: 21px;
+    font-weight: 500;
+    margin: 0;
+    padding: 0 15px;
+}
+
+#my_profile {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0 10px 30px 4%;
+}
+
+#my_profile > .username > *{
+    font-size: 17px;
+    padding: 3px 10px 5px;
+    text-decoration: none;
+}
+
+#my_profile img{
+    height: 57px;
+    width: 57px;
+    border-radius: 50%;
+    background-position: center;
+    object-fit: cover;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+    flex-shrink: 0;
+}
+
+#user_description {
+    width: 100%;
+    max-width: 700px;
+    margin: 12px 15px;
+    padding: 15px 25px;
+    background-color: #D9D9D9;
+    border-radius: 24px;
+}
+
+#user_description p {
+    margin: 0;
+    font-family: "Quicksand", sans-serif;
+    font-size: 18px;
+    font-weight: 500;
+}
+
+.space-btw {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin: 35px 0;
+}
+
+#update-user-btn {
+    height: 35px;
+    width: 65px;
+    margin-left: 17px;
+    padding: 5px 0;
+}
+
+.green-btn {
+    background-color: rgba(186, 217, 206, 0.54);
+    border-radius: 24px;
+    text-align: center;
+    text-decoration: none;
+    color: #000;
+    font-family: "Quicksand", sans-serif;
+    font-size: 18px;
+    font-weight: 500;
+}
+
+#filterBtn {
+    height: 35px;
+    width: 100px;
+    margin-right: 17px;
+}
+
+.flex-end{
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+
+}
+
+#side-menu {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: 60vw;
+    max-width: 250px;
+    height: 100vh;
+    background-color: #fff;
+    box-shadow: -35px 0 8px rgba(0, 0, 0, 0.2);
+    transition: right 0.3s ease;
+    padding: 1rem;
+    z-index: 5;
+}
+
+#side-menu.open {
+    right: 0;
+}
+
+#side-menu button {
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+}
+
+#side-menu > a {
+    margin: 25px auto 0;
+}
+
+#menu_div{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    text-align: center;
+}
+
+#deconnect_btn {
+    color: #dd0707;
+    font-family: "Quicksand", sans-serif;
+    font-size: 23px;
+    font-weight: 500;
+}
+
+#album_section{
+  display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    padding: 9px 0;
+    width: 100%;
+}
+
+#album_section div {
+    margin: 6px;
+    text-align: center;
+}
+
+#album_section div a {
+    text-decoration: none;
+    color: #000;
+    font-family: "Quicksand", sans-serif;
+    font-size: 20px;
+    font-weight: 500;
+}
+
+.card {
+    max-width: 180px;
+}
+
+.album_icon, .photo_icon{
+    height: 179px;
+    width: 179px;
+    object-position: center;
+    object-fit: cover;
+    background-size: cover;
+    border-radius: 36px; 
+}
+
+h1{
+    margin: 2.3em 0;
+    text-align: center;
+    width: 100%;
+    font-family: "Salsa", cursive;
+}
+
+.link_functions {
+    text-decoration: none;
+    color: #D89E00;
+    font-size: 20px;
+    padding : 5px;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: flex-start;
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto 0;
+    color: #000;
+    font-family: "Quicksand", sans-serif;
+}
+
+.form > label {
+    color: #000;
+    font-family: "Quicksand", sans-serif;
+    font-size: 19px;
+}
+
+.form > input, .form > textarea {
+    margin-bottom: 1.5em;
+    background-color: #D9D9D9;
+    border-radius: 24px;
+    width: 100%;
+    min-height: 20px;
+    padding: 5px 10px;
+    border-color: transparent;
+    font-family: "Quicksand", sans-serif;
+    font-size: 17px;
+}
+
+#input_photo {
+    max-width: 400px;
+}
+
+select {
+    height: 35px;
+    width: 140px;
+    border-color: transparent;
+    border-radius: 24px;
+    background-color: rgba(186, 217, 206, 0.54);
+    text-align: center;
+    color: #000;
+    font-family: "Quicksand", sans-serif;
+    font-size: 17px;
+}
+
+option {
+    background-color: #fffffdda;
+}
+
+.form > button {
+    flex-basis: auto;
+    margin: 3em auto;
+    height: 40px;
+    width: 180px;
+    border-color: transparent;
+    border-radius: 24px;
+    background-color: #F2BB16;
+    text-align: center;
+    color: #000;
+    font-family: "Quicksand", sans-serif;
+    font-size: larger;
+    font-weight: 500;
+}
+
+
+#feed_title {
+    margin-top: 30px;
+    margin-bottom: 1.5em;
+    font-size: 50px;
+    text-align: start;
+}
+
+#friends_profile {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 100%;
+    margin: 2em 0;
+    height: auto;
+    overflow-x: auto;
+    scrollbar-width: none;
+}
+
+.friends_pp img{
+    object-position: center;
+    object-fit: cover;
+    background-size: cover;
+    width: 70px;
+    height: 70px;
+    border-radius: 100px;
+    margin: 0 15px;
+}
+
+.friends_pp p{
+    text-align: center;
+    color: #000;
+    font-family: "Quicksand", sans-serif;
+    font-size: 17px;
+    font-weight: 500;
+    margin: 0;
+}
+
+.posts {
+    width: 100%;
+    columns: 164px;
+}
+
+.post {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 400px;
+    flex-shrink: 0;
+    gap: 0;
+    margin-bottom : 20px;
+    break-inside: avoid; 
+}
+
+.post img {
+    width: 100%;
+    max-width: 400px;
+    max-height: 600px;
+    border-top-right-radius: 24px;
+    border-top-left-radius: 24px;
+    padding: 0;
+}
+
+.post > div {
+    background-color: rgba(17, 140, 140, 0.5);
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+    padding: 9px;
+    border-bottom-left-radius: 24px;
+    border-bottom-right-radius: 24px;
+}
+
+.post > div h3 {
+    font-size: 21px;
+    font-weight: 600;
+    margin: 0;
+}
+
+p {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.post > div > * {
+    width: 100%;
+    text-align: start;
+    color: #000;
+    font-family: "Quicksand", sans-serif;
+    font-size: 17px;
+    font-weight: 500;
+    margin: 3px 0;
+}
+
+#preview_album_photo {
+    filter: brightness(115%);
+    width: 100vw;
+    height: 360px;
+    object-position: center;
+    object-fit: cover;
+    background-size: cover;
+    position: relative;
+    margin-top: -100px;
+    left: -15px;
+    z-index: -1;
+}
+
+#album_presentation {
+    margin-bottom: 2em;
+}
+
+#album_presentation h1 {
+    margin: 0;
+    text-align: start;
+}
+
+#album_presentation p {
+    margin-bottom: 3.6em;
+}
+
+#photos {
+    columns: 164px;
+}
+
+.photo {
+    break-inside: avoid; 
+    background-color: #d9d9d9;
+    border-radius: 24px;
+    margin: auto;
+    margin-bottom: 20px;
+}
+
+.photo img {
+    background-position: center;
+    object-fit: cover;
+    border-radius: 24px;
+    width: 100%;
+}
+
+.photo p {
+    text-align: start;
+    color: #000;
+    font-family: "Quicksand", sans-serif;
+    font-size: 17px;
+    font-weight: 500;
+    margin-left: 10px;
+    margin-top: 3px;
+}
+
+@media (min-width: 558px) and (max-width: 767px) {
+    #photos {
+        columns: 190px;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 1024px) {
+    #side-menu {
+        box-shadow: -45px 0 8px rgba(0, 0, 0, 0.2);
+    }
+
+    #photos {
+        columns: 250px;
+    }
+}
+
+@media (min-width: 1025px) {
+    #side-menu {
+        box-shadow: -65px 0 8px rgba(0, 0, 0, 0.2);
+    }
+
+    #photos {
+        columns: 300x;
+    }
+}
