@@ -47,6 +47,29 @@
             }
         }
 
+        public function update(int $album_id, string $title, int $owner_id, string $description, string $visibility, string $album_cover_url) {
+            try {
+                $state = $this->pdo->prepare('UPDATE albums
+                SET `name` = :name, 
+                `description` = :description,
+                `visibility` = :visibility,
+                `album_cover_url` = :album_cover_url
+                WHERE owner_id = :owner_id
+                AND id = :album_id;');
+
+                $state->bindParam(':album_id', $album_id);
+                $state->bindParam(':name', $title);
+                $state->bindParam(':owner_id', $owner_id);
+                $state->bindParam(':description', $description);
+                $state->bindParam(':visibility', $visibility);
+                $state->bindParam(':album_cover_url', $album_cover_url);
+                $state->execute();
+
+            } catch (Exception $e) {
+                return $errors[] = "Erreur à la création de l'album {$e->getMessage()}";
+            }
+        }
+
         public function delete(int $album_id) {
             try {
                 $state = $this->pdo->prepare('DELETE FROM albums WHERE id = :id;');

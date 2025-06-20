@@ -98,6 +98,7 @@ nav {
     height: 43px;
     width: 43px;
     margin: 0 25px 35px 0;
+    flex : 0 0 auto;
 }
 
 #menuBtn a {
@@ -284,8 +285,14 @@ h1{
     font-family: "Salsa", cursive;
 }
 
+.link_functions {
+    text-decoration: none;
+    color: #D89E00;
+    font-size: 20px;
+    padding : 5px;
+}
 
-.create_form {
+.form {
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
@@ -297,13 +304,13 @@ h1{
     font-family: "Quicksand", sans-serif;
 }
 
-.create_form > label {
+.form > label {
     color: #000;
     font-family: "Quicksand", sans-serif;
     font-size: 19px;
 }
 
-.create_form > input, .create_form > textarea {
+.form > input, .form > textarea {
     margin-bottom: 1.5em;
     background-color: #D9D9D9;
     border-radius: 24px;
@@ -335,7 +342,7 @@ option {
     background-color: #fffffdda;
 }
 
-.create_form > button {
+.form > button {
     flex-basis: auto;
     margin: 3em auto;
     height: 40px;
@@ -383,11 +390,8 @@ option {
 }
 
 #posts {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-evenly;
-    gap: 20px;
     width: 100%;
+    columns: 164px;
 }
 
 .post {
@@ -395,9 +399,10 @@ option {
     flex-direction: column;
     width: 100%;
     max-width: 400px;
-    height: fit-content;
     flex-shrink: 0;
     gap: 0;
+    margin-bottom : 20px;
+    break-inside: avoid; 
 }
 
 .post img {
@@ -444,6 +449,10 @@ option {
     z-index: -1;
 }
 
+#album_presentation {
+    margin-bottom: 2em;
+}
+
 #album_presentation h1 {
     margin: 0;
     text-align: start;
@@ -454,18 +463,15 @@ option {
 }
 
 #photos {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(166px, 1fr));
-    gap: 15px;
+    columns: 164px;
 }
 
 .photo {
-    width: 100%;
-    max-width: 300px;
+    break-inside: avoid; 
     background-color: #d9d9d9;
     border-radius: 24px;
-    margin-left: auto;
-    margin-right: auto;
+    margin: auto;
+    margin-bottom: 20px;
 }
 
 .photo img {
@@ -473,7 +479,6 @@ option {
     object-fit: cover;
     border-radius: 24px;
     width: 100%;
-    height: 250px;
 }
 
 .photo p {

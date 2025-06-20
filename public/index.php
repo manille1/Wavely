@@ -23,12 +23,16 @@
     $router->addRoute('/profile', 'Profile@show');
     $router->addRoute('/create-album', 'AlbumController@showCreate');
     $router->addRoute('/create-album-send', 'AlbumController@create');
+    $router->addRoute('/update-album', 'AlbumController@showUpdate');
+    $router->addRoute('/update-album-send', 'AlbumController@update');
     $router->addRoute('/album', 'AlbumController@showAlbum');
     $router->addRoute('/delete-album', 'AlbumController@delete');
 
     $router->addRoute('/create-photo', 'PhotoController@showCreate');
     $router->addRoute('/create-photo-send', 'PhotoController@create');
     $router->addRoute('/photo', 'PhotoController@showPhoto');
+    $router->addRoute('/update-photo', 'PhotoController@showUpdate');
+    $router->addRoute('/update-photo-send', 'PhotoController@update');
     $router->addRoute('/delete-photo', 'PhotoController@delete');
 
     $router->dispatch($_SERVER['REQUEST_URI']);

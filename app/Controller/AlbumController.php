@@ -15,15 +15,15 @@
             $navbar = ob_get_clean();
 
             ob_start();
-            include __DIR__ . '/../View/create_album.php';
+            include __DIR__ . '/../View/form_album.php';
             $content = ob_get_clean();
 
             include __DIR__ . '/../View/layout.php';
         }
 
         public function showAlbum() {
+            $errors = [];
             $album_id = $_GET['id'] ?? null;
-            $album_id = cleanString($album_id);
 
             $albumManager = new AlbumManager($this->pdo);
             $album = $albumManager->getAlbumById($album_id);
@@ -31,7 +31,7 @@
             $photoManager = new PhotoManager($this->pdo);
             $photos = $photoManager->getPhotosByAlbumId($album_id);
 
-            if (isset($album_id) && $_SESSION['id'] == $album['owner_id']) {
+            if (isset($album_id) && $album['visibility'] == 'public') {
                 ob_start();
                 include __DIR__ . '/../_partials/feed_navbar.php';
                 $navbar = ob_get_clean();
@@ -41,7 +41,93 @@
                 $content = ob_get_clean();
 
                 include __DIR__ . '/../View/layout.php';
+
+            } else {
+                $errors[] = 'Une erreur c\'est produite lors de la récupération des donnée, veuillez réessayer.';
+                $_SESSION["errors"] = $errors;
+                header("Location: /profile");
+                exit();
             }
+        }
+
+        public function showUpdate() {
+            $errors = [];
+            $album_id = $_GET['id'];
+
+            $albumManager = new AlbumManager($this->pdo);
+            $album = $albumManager->getAlbumById($album_id);
+
+            $isSelected = null;
+            if($_GET['action'] === 'update' && $album['visibility'] !== null) {
+                $isSelected = $album['visibility'];
+            }
+
+            if(!empty($album)) {
+                ob_start();
+                include __DIR__ . '/../_partials/profile_navbar.php';
+                $navbar = ob_get_clean();
+
+                ob_start();
+                include __DIR__ . '/../View/form_album.php';
+                $content = ob_get_clean();
+
+                include __DIR__ . '/../View/layout.php';
+            } else {
+                $errors[] = 'Une erreur c\'est produite lors de la récupération des donnée d\'un, veuillez réessayer.';
+                $_SESSION["errors"] = $errors;
+                header("Location: /album?id=" . $album_id);
+                exit();
+            }
+        }
+
+        public function update() {
+            $errors = [];
+            $album_id = $_POST['album_id'] ?? null;
+
+            $albumManager = new AlbumManager($this->pdo);
+            $album = $albumManager->getAlbumById($album_id);
+
+            $title = $_POST['album_title'] ?? null;
+            $description = $_POST['album_description'] ?? null;
+            $visibility = $_POST['visibility'] ?? null;
+            $album_cover_url = '';
+
+            if (isset($album_id) && $_SESSION['id'] == $album['owner_id'] && empty($errors)) {
+                $title = cleanString($title);
+                $owner_id = $album['owner_id'];
+                $new_album_cover_url = '';
+                $description = cleanString($description);
+                $visibility = cleanString($visibility);
+
+                if (isset($_FILES['photo']) && $_FILES['photo']['error'] === UPLOAD_ERR_OK) {
+
+                    if(!empty($album['album_cover_url'])) {
+                        $old_photo = $album['album_cover_url'];
+                        $path = __DIR__ . '/../../public/' . $old_photo;
+                        if (file_exists($path)) {
+                            unlink($path); 
+                        }
+                    }
+
+                    $photoManager = new PhotoManager($this->pdo);
+                    $new_album_cover_url = $photoManager->checkAndConvertImage() ?? null;
+                }
+
+                if (empty($errors)) {
+                    $albumManager->update($album_id, $title, $owner_id, $description, $visibility, $new_album_cover_url);
+
+                    $success[] = 'Album Modifier avec succès';
+                    $_SESSION['success'] = $success;
+                    header('Location: /album?id=' . $album_id);
+                    exit();     
+                } 
+            } else {
+                $errors[] = 'Merci de renseigner tout les champs';
+            }
+
+            $_SESSION["errors"] = $errors;
+            header("Location: /update-album?action=id=" . $album_id);
+            exit();
         }
 
         public function delete() {
@@ -69,7 +155,13 @@
                 $_SESSION['success'] = $success;
                 header('Location: /profile');
                 exit();              
+            }else {
+                $errors[] = 'Tous les champs sont obligatoires';
             }
+
+            $_SESSION["errors"] = $errors;
+            header("Location: /profile");
+            exit();
         }
 
         public function create() {
@@ -94,7 +186,6 @@
                     $album_cover_url = $photoManager->checkAndConvertImage();
                 }
 
-                    var_dump($album_cover_url);
                 if(empty($errors)){
                     $albumManager = new AlbumManager($this->pdo);
                     $newAlbums = $albumManager->create($title, $owner_id, $description, $date_creation, $visibility, $album_cover_url);
@@ -108,10 +199,12 @@
                     header('Location: /profile');
                     exit();
                 }                
+            } else {
+                $errors[] = 'Merci de renseigner tout les champs';
             }
 
             $_SESSION["errors"] = $errors;
-            header("Location: /profile");
+            header("Location: /create-album");
             exit();
         }
     }

@@ -56,6 +56,21 @@
             }
         }
 
+        // public function getPhotoByAlbumId(int $albumId) {
+        //     try {
+        //         $stmt = $this->pdo->prepare("SELECT * FROM photos
+        //         INNER JOIN photo_album AS pa ON photos.id = pa.photo_id
+        //         WHERE pa.album_id = :album_id;");
+
+        //         $stmt->bindParam(':album_id', $albumId);
+        //         $stmt->execute();
+        //         return $stmt->fetch(PDO::FETCH_ASSOC);
+
+        //     } catch (Exception $e) {
+        //         return $errors[] = "Erreur lors de la recherche d'album liée à un photo {$e->getMessage()}";
+        //     }
+        // }
+
         public function getPhotoById(int $photoId) {
             try {
                 $stmt = $this->pdo->prepare("SELECT * FROM photos WHERE id = :photo_id");
@@ -70,7 +85,7 @@
 
         public function linkedPhotoToAlbum(int $photo_id, int $album_id) {
             try {
-                $stmt = $this->pdo->prepare('INSERT INTO photo_album (photo_id, album_id) VALUES (:photo_id, :album_id)');
+                $stmt = $this->pdo->prepare('INSERT INTO photo_album (`photo_id`, `album_id`) VALUES (:photo_id, :album_id)');
                 $stmt->bindParam(':photo_id', $photo_id);
                 $stmt->bindParam(':album_id', $album_id);
                 return $stmt->execute();
@@ -113,6 +128,31 @@
             } catch (Exception $e) {
                 error_log("Erreur à la création de la photo : " . $e->getMessage());
                 return false;
+            }
+        }
+
+        public function update(int $photo_id, string $title, int $creator_id, string $description, string $visibility, string $image_url) {
+            try {
+                $state = $this->pdo->prepare('UPDATE photos
+                SET `name` = :name, 
+                `visibility` = :visibility,
+                `description` = :description,
+                `location` = :location,
+                `image_url` = :image_url
+                WHERE creator_id = :creator_id
+                AND id = :photo_id;');
+
+                $state->bindParam(':photo_id', $photo_id);
+                $state->bindParam(':name', $title);
+                $state->bindParam(':creator_id', $creator_id);
+                $state->bindParam(':visibility', $visibility);
+                $state->bindParam(':description', $description);
+                $state->bindParam(':location', $location);
+                $state->bindParam(':image_url', $image_url);
+                $state->execute();
+
+            } catch (Exception $e) {
+                return $errors[] = "Erreur à la création de l'album {$e->getMessage()}";
             }
         }
 
