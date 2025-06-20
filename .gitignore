@@ -1,0 +1,4 @@
+/public/uploads/*
+!/public/uploads/.gitkeep
+/public/assets/img/*
+!/public/assets/img/.gitkeep
