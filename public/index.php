@@ -21,6 +21,9 @@
     $router->addRoute('/user-profile', 'Profile@showOtherProfile');
 
     $router->addRoute('/profile', 'Profile@show');
+    $router->addRoute('/update-profile', 'Profile@showUpdate');
+    $router->addRoute('/update-profile-send', 'Profile@update');
+
     $router->addRoute('/create-album', 'AlbumController@showCreate');
     $router->addRoute('/create-album-send', 'AlbumController@create');
     $router->addRoute('/update-album', 'AlbumController@showUpdate');

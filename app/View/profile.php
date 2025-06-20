@@ -1,13 +1,14 @@
 <main>
     <section id="user_profile">
-        <img src="../<?= $profile_picture; ?>" alt="your profile's picture">
-        <div class="username"><h2><?= $username; ?></h2></div>
+        <img src="../<?= $_SESSION['profile_picture']; ?>" alt="your profile's picture">
+        <div class="username"><h2><?= $_SESSION['username']; ?></h2></div>
         <div id="user_description">
-            <p><?= $description; ?></p>
+            <p><?= $_SESSION['description']; ?></p>
         </div>
-        <div class="flex-end">
-            <select id="filterBtn" name="filterBtn">
-                <option value="default" selected>Filtrer</option>
+        <div class="space-btw">
+            <a id="update-user-btn" class="green-btn" href="/update-profile?id=<?= $_SESSION['id'] ?>"><i class="fa-solid fa-pen-to-square"></i></a>
+            <select id="filterBtn" class="green-btn" name="filterBtn">
+                <option value="" disabled selected>Filtrer</option>
                 <option value="album">Album</option>
                 <option value="photo">Photo</option>
             </select>

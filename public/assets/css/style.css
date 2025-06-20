@@ -178,21 +178,37 @@ nav {
     font-weight: 500;
 }
 
-#filterBtn {
-    height: 30px;
-    width: 100px;
-    margin-right: 17px;
+.space-btw {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin: 35px 0;
+}
+
+#update-user-btn {
+    height: 35px;
+    width: 65px;
+    margin-left: 17px;
+    padding: 5px 0;
+}
+
+.green-btn {
     background-color: rgba(186, 217, 206, 0.54);
     border-radius: 24px;
     text-align: center;
-}
-
-#filterBtn a {
     text-decoration: none;
     color: #000;
     font-family: "Quicksand", sans-serif;
     font-size: 18px;
     font-weight: 500;
+}
+
+#filterBtn {
+    height: 35px;
+    width: 100px;
+    margin-right: 17px;
 }
 
 .flex-end{

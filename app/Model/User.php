@@ -14,6 +14,14 @@
             return $user ?: null;
         }
 
+        public function findById(int $id): ?array {
+            $stmt = $this->pdo->prepare("SELECT * FROM users WHERE id = :id");
+            $stmt->bindParam(':id', $id);
+            $stmt->execute();
+            $user = $stmt->fetch(PDO::FETCH_ASSOC);
+            return $user ?: null;
+        }
+
         public function findByUsername(string $username): ?array {
             $stmt = $this->pdo->prepare("SELECT * FROM users WHERE username = :username");
             $stmt->bindParam(':username', $username);
@@ -40,6 +48,27 @@
                 $state->execute();
             } catch (Exception $e) {
                 return $errors[] = "Erreur à la création du user {$e->getMessage()}";
+            }
+        }
+
+        public function update(int $id, string $username, string $description, string $profile_picture) {
+            try {
+                $state = $this->pdo->prepare('UPDATE users
+                SET `username` = :username, 
+                `description` = :description,
+                `profile_picture` = :profile_picture
+                WHERE id = :id;');
+
+                $state->bindParam(':id', $id);
+                $state->bindParam(':username', $username);
+                $state->bindParam(':description', $description);
+                $state->bindParam(':profile_picture', $profile_picture);
+                $state->execute();
+                
+                return $this->findById($id);
+
+            } catch (Exception $e) {
+                return $errors[] = "Erreur à la modification du profile utilisateur {$e->getMessage()}";
             }
         }
 

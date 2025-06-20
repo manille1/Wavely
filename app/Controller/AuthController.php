@@ -37,6 +37,7 @@
                 } else {
                     $_SESSION["auth"] = true;
                     $_SESSION["id"] = $user['id'];
+                    $_SESSION['email'] = $user['email'];
                     $_SESSION["username"] = $user['username'];
                     $_SESSION["description"] = $user['description'];
                     $_SESSION["profile_picture"] = !empty($user['profile_picture']) ? $user['profile_picture'] : '/assets/img/default-pp.jpg';
@@ -74,8 +75,6 @@
                     $photoManager = new PhotoManager($this->pdo);
                     $profile_picture_url = $photoManager->checkAndConvertImage();
 
-                    var_dump('ça passe');
-
                     if ($confirmation !== $password) {
                         $errors[] = 'Le mot de passe et sa confirmation sont différents';
                     } else {
@@ -96,10 +95,6 @@
 
                     if (empty($errors)) {
                         $res = $User->create($email, $username, $password, $profile_picture_url, $description);
-
-                        $_SESSION["auth"] = true;
-                        $_SESSION["username"] = $username;
-                        $_SESSION["description"] = $description;
                         
                         $success[] = 'Votre compte à été crée. Connectez-vous !';
                         $_SESSION['success'] = $success;
