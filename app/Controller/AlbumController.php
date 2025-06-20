@@ -45,7 +45,7 @@
             } else {
                 $errors[] = 'Une erreur c\'est produite lors de la récupération des données, veuillez réessayer.';
                 $_SESSION["errors"] = $errors;
-                header("Location: /profile");
+                header("Location: /profile?action=album");
                 exit();
             }
         }
@@ -154,14 +154,14 @@
 
                 $success[] = 'Album supprimer avec succès';
                 $_SESSION['success'] = $success;
-                header('Location: /profile');
+                header('Location: /profile?action=album');
                 exit();              
             }else {
                 $errors[] = 'Tous les champs sont obligatoires';
             }
 
             $_SESSION["errors"] = $errors;
-            header("Location: /profile");
+            header("Location: /profile?action=album");
             exit();
         }
 
@@ -192,12 +192,11 @@
                     $newAlbums = $albumManager->create($title, $owner_id, $description, $date_creation, $visibility, $album_cover_url);
 
                     if(!empty($add_photos)){
-                        //envoyer au formulaire d'ajout de photo et gérer tout ça dans les fichier relier aux photos
                         header('Location: /create-photo?album_id=' . $newAlbums['id']);
                         exit();
                     }
 
-                    header('Location: /profile');
+                    header('Location: /profile?action=album');
                     exit();
                 }                
             } else {

@@ -24,6 +24,22 @@ main {
     margin: 0 auto;
     padding: 0 15px;
 }
+
+.visible {
+    opacity: 1;
+}
+
+.non-visible{
+    opacity: 0;
+}
+
+.void_case {
+    color: #000;
+    font-family: "Quicksand", sans-serif;
+    font-size: 21px;
+    font-weight: 500;
+    margin: 10px;
+}
   
 #menu_nav {
     display: flex;
@@ -263,15 +279,15 @@ nav {
     font-weight: 500;
 }
 
-#album_section {
-    display: flex;
+#album_section{
+  display: flex;
     flex-wrap: wrap;
     justify-content: space-evenly;
     padding: 9px 0;
     width: 100%;
 }
 
-#album_section div{
+#album_section div {
     margin: 6px;
     text-align: center;
 }
@@ -284,11 +300,11 @@ nav {
     font-weight: 500;
 }
 
-.album-card {
+.card {
     max-width: 180px;
 }
 
-.album_icon {
+.album_icon, .photo_icon{
     height: 179px;
     width: 179px;
     object-position: center;
@@ -414,7 +430,7 @@ option {
     margin: 0;
 }
 
-#posts {
+.posts {
     width: 100%;
     columns: 164px;
 }

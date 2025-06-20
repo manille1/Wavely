@@ -16,7 +16,7 @@
         <?php endif; ?>
     </section>
 
-    <section id="posts">
+    <section class="posts">
         <?php if (empty($photos_feed)) : ?>
             <p>Il y a eu une erreur lors de la récupération du contenu, veuillez recharger la page ou vous reconnécter.</p>
         <?php else : ?>

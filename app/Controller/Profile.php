@@ -11,8 +11,15 @@
         }
 
         public function show() {
-            $albumManager = new AlbumManager($this->pdo);
-            $albums = $albumManager->getAllAlbumsByUser($_SESSION['id']);
+            if ($_GET['action'] === 'album') {
+                $albumManager = new AlbumManager($this->pdo);
+                $albums = $albumManager->getAllAlbumsByUser($_SESSION['id']);
+            }
+
+            if ($_GET['action'] === 'photo') {
+                $photoManager = new PhotoManager($this->pdo);
+                $photos = $photoManager->getPhotosForUser($_SESSION['id']);
+            }
 
             $username = $_SESSION['username'];
             $profile_picture = $_SESSION['profile_picture'];
@@ -79,7 +86,7 @@
 
                         $success[] = 'Le profile a été modifier avec succès';
                         $_SESSION['success'] = $success;
-                        header('Location: /profile');
+                        header('Location: ?action=album');
                         exit();   
                         
                     } else {

@@ -26,6 +26,22 @@
             }
         }
 
+        public function getPhotosForUser($user_id) {
+            try {
+                $stmt = $this->pdo->prepare("SELECT * FROM photos
+                LEFT JOIN photo_roles ON photos.id = photo_roles.photo_id
+                WHERE (photo_roles.user_id = :user_id AND photo_roles.role = 'owner')
+                ORDER BY photos.date_upload DESC;");
+
+                $stmt->bindParam(':user_id', $user_id);
+                $stmt->execute();
+                return $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+            } catch (Exception $e) {
+                return $errors[] = "Erreur lors de la recherche de photo pour le feed d'actualité {$e->getMessage()}";
+            }
+        }
+
         public function getPhotosByAlbumId(int $albumId) {
             try {
                 $stmt = $this->pdo->prepare("SELECT * FROM photos

@@ -47,11 +47,9 @@
         const toasts = document.querySelectorAll('.toast')
         toasts.forEach(toast => {
             toast.classList.add('display')
-            console.log('je panique');
 
             setTimeout(() => {
                 toast.classList.remove('display')
-                console.log('je panique 2');
             }, 5000);
         });
     </script>
